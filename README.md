@@ -6,13 +6,13 @@ Website: [https://github.com/kr5hn4/tranzit](https://github.com/kr5hn4/tranzit)
 
 ## 📥 Download
 
-| Platform   | Link           |
-| ---------- | -------------- |
-| Windows 🪟 | [Download](#)  |
-| macOS 🍎   | coming soon... |
-| Linux 🐧   | [Download](#)  |
-| Android 🤖 | [Download](#)  |
-| iOS 🍏     | coming soon... |
+| Platform | Link           |
+| -------- | -------------- |
+| Windows  | [Download](#)  |
+| macOS    | coming soon... |
+| Linux    | [Download](#)  |
+| Android  | [Download](#)  |
+| iOS      | coming soon... |
 
 ## 🛠️ Built With
 
