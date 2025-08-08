@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="32px" width="32px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 488 488" xml:space="preserve">
+  <polygon style="fill:#0DA2D6;" points="0.144,254.608 0.16,420.52 199.496,447.824 199.336,255.888 " />
+  <g>
+    <polyline style="fill:#20B5EC;" points="0.16,420.52 199.496,447.824 199.336,255.888 	" />
+    <polygon style="fill:#20B5EC;" points="484,0 220,38.472 220,233.456 484,231.36 	" />
+  </g>
+  <polyline style="fill:#0DA2D6;" points="484,0 220,38.472 220,228 " />
+  <polygon style="fill:#20B5EC;" points="0,69.096 0.184,234.92 199.528,233.784 199.432,42.024 " />
+  <polyline style="fill:#0DA2D6;" points="0.184,234.92 199.528,233.784 199.432,42.024 " />
+  <polygon style="fill:#20B5EC;" points="223.52,450.792 487.928,488 488,257.688 223.152,257.256 " />
+  <polyline style="fill:#0DA2D6;" points="223.52,450.792 487.928,488 488,257.688 " />
+</svg>
+
