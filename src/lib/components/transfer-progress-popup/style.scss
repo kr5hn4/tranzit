@@ -1,0 +1,216 @@
+$border-radius-large: 16px;
+$border-radius-medium: 8px;
+$border-radius-small: 4px;
+
+$padding-xsmall: 8px;
+$padding-small: 10px;
+$padding-medium: 12px;
+$padding-large: 16px;
+$padding-xlarge: 24px;
+$padding-xxlarge: 32px;
+
+$font-size-base: 1rem;
+$font-size-small: 0.9rem;
+$font-size-large: 1.5rem;
+$font-size-icon-large: 48px;
+$font-size-icon-medium: 24px;
+
+$transition-duration-fast: 0.2s;
+$transition-duration-medium: 0.3s;
+$transition-duration-slow: 0.5s;
+
+$color-surface: var(--theme-surface);
+$color-text-primary: var(--theme-text-primary);
+$color-text-secondary: var(--theme-text-secondary);
+$color-primary-accent: var(--theme-primary-accent);
+$color-divider: var(--theme-divider);
+$color-progress-bg: var(--theme-progress-bg);
+
+// Mixins
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin button-base {
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: $font-size-base;
+  border-radius: $border-radius-medium;
+  transition: background-color $transition-duration-fast ease, color $transition-duration-fast ease;
+}
+
+@mixin scrollbar-padding {
+  padding-right: 12px; // scrollbar space
+}
+
+// Styles
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(10px);
+  @include flex-center(row, center, center);
+  padding: $padding-large;
+  z-index: 9999;
+}
+
+.popup-card {
+  background-color: $color-surface;
+  color: $color-text-primary;
+  border-radius: $border-radius-large;
+  padding: $padding-xxlarge;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: var(--theme-card-shadow);
+  animation: popup-fade-in $transition-duration-medium ease-out;
+  user-select: none;
+
+  .popup-header {
+    text-align: center;
+    margin-bottom: $padding-xxlarge;
+
+    .popup-icon {
+      font-size: $font-size-icon-large;
+      color: $color-primary-accent;
+    }
+
+    .popup-title {
+      font-size: $font-size-large;
+      font-weight: 500;
+      margin: $padding-xsmall 0 $padding-small 0;
+    }
+  }
+
+  .recipient-info {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    margin: 0;
+
+    strong {
+      color: $color-text-primary;
+      font-weight: 500;
+    }
+  }
+
+  .transfer-animation-container {
+    @include flex-center(row, space-between, center);
+    margin: $padding-xxlarge auto;
+    max-width: 280px;
+
+    .device-graphic {
+      font-size: $font-size-icon-large;
+      color: $color-text-secondary;
+    }
+
+    .transfer-path {
+      flex-grow: 1;
+      @include flex-center(row, space-around, center);
+      padding: 0 $padding-xxlarge;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background-color: $color-primary-accent;
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+  }
+
+  .file-list-container {
+    max-height: 240px;
+    overflow-y: auto;
+    @include scrollbar-padding;
+  }
+
+  .file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .file-item {
+    @include flex-center(row, flex-start, center);
+    padding: $padding-medium 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-divider;
+    }
+
+    .file-icon {
+      font-size: $font-size-icon-medium;
+      margin-right: 16px;
+      color: $color-text-secondary;
+    }
+
+    .file-details {
+      flex-grow: 1;
+
+      .file-name {
+        font-size: $font-size-base;
+        color: $color-text-primary;
+        margin-bottom: $padding-small;
+        display: block;
+      }
+    }
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: $color-progress-bg;
+    border-radius: $border-radius-small;
+    overflow: hidden;
+
+    &-fill {
+      height: 100%;
+      background-color: $color-primary-accent;
+      border-radius: $border-radius-small;
+      transition: width $transition-duration-slow ease;
+    }
+  }
+
+  .progress-text {
+    font-size: $font-size-small;
+    color: $color-text-secondary;
+    margin-left: 16px;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .popup-actions {
+    margin-top: $padding-xxlarge;
+    text-align: center;
+
+    .popup-button {
+      @include button-base;
+      color: $color-primary-accent;
+      border: 1px solid $color-primary-accent;
+      padding: $padding-small $padding-large;
+      background-color: transparent;
+      width: auto;
+
+      &:hover {
+        background-color: $color-primary-accent;
+        color: $color-surface;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

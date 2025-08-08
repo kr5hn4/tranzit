@@ -1,0 +1,169 @@
+$border-radius-large: 16px;
+$border-radius-medium: 8px;
+$border-radius-small: 6px;
+
+$padding-xsmall: 8px;
+$padding-small: 12px;
+$padding-medium: 16px;
+$padding-large: 24px;
+$padding-xlarge: 32px;
+
+$font-size-base: 1rem;
+$font-size-small: 0.9rem;
+$font-size-large: 1.5rem;
+$font-size-icon: 48px;
+$font-size-file-icon: 20px;
+
+$transition-duration: 0.1s;
+
+$color-surface: var(--theme-surface);
+$color-text-primary: var(--theme-text-primary);
+$color-text-secondary: var(--theme-text-secondary);
+$color-primary-accent: var(--theme-primary-accent);
+$color-success: var(--theme-success);
+$color-error: var(--theme-error);
+$color-primary-accent-text: var(--theme-primary-accent-text);
+$color-divider: var(--theme-divider);
+$overlay-bg: rgba(0, 0, 0, 0.5);
+$file-list-bg: rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin button-base {
+  border: none;
+  border-radius: $border-radius-medium;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: $font-size-base;
+  padding: $padding-small $padding-xlarge;
+  transition: opacity $transition-duration ease;
+}
+
+@mixin scrollable-container($max-height) {
+  max-height: $max-height;
+  overflow-y: auto;
+  background-color: $file-list-bg;
+  border-radius: $border-radius-medium;
+  padding: $padding-xsmall;
+  margin-bottom: $padding-large;
+  border: 1px solid $color-divider;
+}
+
+// Styles
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: $overlay-bg;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(10px);
+  @include flex-center(row, center, center);
+  padding: $padding-medium;
+  z-index: 9999;
+}
+
+.popup-card {
+  background-color: $color-surface;
+  color: $color-text-primary;
+  border-radius: $border-radius-large;
+  padding: $padding-xlarge;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--theme-card-shadow);
+  animation: popup-fade-in $transition-duration ease-out;
+  user-select: none;
+
+  .popup-header {
+    text-align: center;
+    margin-bottom: $padding-large;
+
+    .popup-icon {
+      font-size: $font-size-icon;
+      color: $color-primary-accent;
+    }
+
+    .popup-title {
+      font-size: $font-size-large;
+      font-weight: 500;
+      margin: $padding-xsmall 0 $padding-small 0;
+    }
+  }
+
+  .sender-info {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    margin: 0;
+
+    strong {
+      color: $color-text-primary;
+      font-weight: 500;
+    }
+  }
+
+  .file-list-container {
+    @include scrollable-container(180px);
+  }
+
+  .file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .file-item {
+    @include flex-center(row, flex-start, center);
+    padding: $padding-small;
+    border-radius: $border-radius-small;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-divider;
+    }
+
+    .file-icon {
+      font-size: $font-size-file-icon;
+      margin-right: 16px;
+      color: $color-text-secondary;
+    }
+  }
+
+  .popup-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    .popup-button {
+      @include button-base;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    .accept {
+      background-color: $color-success;
+      color: $color-primary-accent-text;
+    }
+
+    .reject {
+      background-color: $color-error;
+      color: $color-primary-accent-text;
+    }
+  }
+}
+
+// Animation
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
