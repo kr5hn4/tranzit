@@ -70,5 +70,5 @@
 </div>
 
 <style>
-  @import "./style.css";
+  @import "./style.scss";
 </style>
