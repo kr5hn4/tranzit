@@ -24,7 +24,7 @@
           serviceType: device.service_type,
           hostname: store.deviceInfo.hostname,
           osType: store.deviceInfo.os_type,
-          backendPort: import.meta.env.VITE_BACKEND_PORT,
+          port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
           ipv4: ipv4,
         });
 
@@ -71,7 +71,7 @@
 
     const response = await invoke("file_transfer_request", {
       ip,
-      backendPort: import.meta.env.VITE_BACKEND_PORT,
+      port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
       selectedFiles: filesArray,
       deviceInfo: store.deviceInfo,
     });
@@ -103,7 +103,7 @@
           };
         }),
         ip,
-        port: import.meta.env.VITE_BACKEND_PORT,
+        port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
       });
     }
   }
@@ -160,7 +160,7 @@
         serviceType: device.service_type,
         hostname: store.deviceInfo.hostname,
         osType: store.deviceInfo.os_type,
-        backendPort: import.meta.env.VITE_BACKEND_PORT,
+        port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
         ipv4: ipv4,
       });
 
