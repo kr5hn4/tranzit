@@ -5,6 +5,15 @@
   "windows": ["main"],
   "permissions": [
     "core:default",
+    "opener:default",
+    "os:default",
+    "os:default",
+    "android-fs:default",
+    "notification:default",
+    "store:default",
+    "dialog:default",
+    "fs:default",
     "opener:default"
   ]
 }
+
