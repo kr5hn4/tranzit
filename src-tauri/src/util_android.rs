@@ -1,61 +1,79 @@
 use crate::debug_log;
+use crate::util::FilePreview;
+use base64::Engine as _;
 use tauri_plugin_android_fs::{AndroidFsExt, FileUri, ImageFormat, Size};
 use uuid::Uuid;
 
-// get file name, full path, size, and previews in base64 for image files
 #[cfg(target_os = "android")]
 #[tauri::command]
 pub async fn get_file_infos_with_previews(
     app: tauri::AppHandle,
 ) -> Result<Vec<FilePreview>, String> {
     use tauri_plugin_android_fs::{AndroidFsExt, ImageFormat as FsImageFormat, Size};
-    let fs = app.android_fs();
 
-    // Show file dialog - if this is sync and blocks, run in spawn_blocking
-    let uris = tauri::async_runtime::spawn_blocking(move || {
-        fs.show_open_file_dialog(None, &["*/*"], true)
-    })
-    .await
-    .map_err(|e| format!("Task join error: {e}"))??;
+    let app = app.clone(); // clone app handle to own it
+
+    let uris = {
+        let app = app.clone();
+        tauri::async_runtime::spawn_blocking(move || {
+            let fs = app.android_fs();
+            fs.show_open_file_dialog(None, &["*/*"], true)
+        })
+        .await
+        .map_err(|e| format!("Task join error: {e}"))?
+        .map_err(|e| format!("FS error: {e}"))?
+    };
 
     let mut previews = vec![];
 
     for uri in uris {
         debug_log!("[DEBUG][Android FileUri]\n{:#?}", uri);
 
-        // Similarly wrap sync fs calls:
-        let name = tauri::async_runtime::spawn_blocking({
-            let fs = fs.clone();
+        let name = {
+            let app = app.clone();
             let uri = uri.clone();
-            move || fs.get_name(&uri)
-        })
-        .await
-        .map_err(|e| format!("Task join error: {e}"))??;
+            tauri::async_runtime::spawn_blocking(move || {
+                let fs = app.android_fs();
+                fs.get_name(&uri)
+            })
+            .await
+            .map_err(|e| format!("Task join error: {e}"))?
+            .map_err(|e| format!("FS error: {e}"))?
+        };
 
-        let mime = tauri::async_runtime::spawn_blocking({
-            let fs = fs.clone();
+        let mime = {
+            let app = app.clone();
             let uri = uri.clone();
-            move || fs.get_mime_type(&uri)
-        })
-        .await
-        .map_err(|e| format!("Task join error: {e}"))??
-        .unwrap_or_default();
+            tauri::async_runtime::spawn_blocking(move || {
+                let fs = app.android_fs();
+                fs.get_mime_type(&uri)
+            })
+            .await
+            .map_err(|e| format!("Task join error: {e}"))?
+            .map_err(|e| format!("FS error: {e}"))?
+            .unwrap_or_default()
+        };
 
-        let bytes = tauri::async_runtime::spawn_blocking({
-            let fs = fs.clone();
+        let bytes = {
+            let app = app.clone();
             let uri = uri.clone();
-            move || fs.read(&uri)
-        })
-        .await
-        .map_err(|e| format!("Task join error: {e}"))??;
+            tauri::async_runtime::spawn_blocking(move || {
+                let fs = app.android_fs();
+                fs.read(&uri)
+            })
+            .await
+            .map_err(|e| format!("Task join error: {e}"))?
+            .map_err(|e| format!("FS error: {e}"))?
+        };
 
         let size = bytes.len() as u64;
 
         let preview_base64 = if mime.starts_with("image/") {
-            tauri::async_runtime::spawn_blocking({
-                let fs = fs.clone();
-                let uri = uri.clone();
-                move || match fs.get_thumbnail(
+            let app = app.clone();
+            let uri = uri.clone();
+            tauri::async_runtime::spawn_blocking(move || {
+                let fs = app.android_fs();
+                match fs.get_thumbnail(
                     &uri,
                     Size {
                         width: 100,
@@ -70,7 +88,7 @@ pub async fn get_file_infos_with_previews(
                 }
             })
             .await
-            .map_err(|e| format!("Task join error: {e}"))??
+            .map_err(|e| format!("Task join error: {e}"))?
         } else {
             None
         };

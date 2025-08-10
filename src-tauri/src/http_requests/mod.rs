@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::json;
 use std::pin::Pin;
 use tauri::{AppHandle, Emitter};
-use tauri_plugin_android_fs::{FileAccessMode, FileUri};
+use tauri_plugin_android_fs::{AndroidFsExt, FileAccessMode, FileUri};
 use tokio_util::codec::{BytesCodec, FramedRead};
 use tokio_util::io::ReaderStream;
 

@@ -11,7 +11,7 @@ use once_cell::sync::OnceCell;
 use tauri::AppHandle;
 
 #[cfg(target_os = "android")]
-use crate::util_android::get_file_infos_with_previews_android;
+use crate::util_android::get_file_infos_with_previews;
 
 #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
 use crate::util::get_file_infos_with_previews;
@@ -21,6 +21,7 @@ static APP_HANDLE: OnceCell<AppHandle> = OnceCell::new();
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub async fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_store::Builder::new().build())

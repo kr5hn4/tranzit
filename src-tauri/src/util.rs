@@ -37,12 +37,12 @@ pub fn get_primary_ipv4() -> Result<IpAddr, String> {
 
 #[derive(Serialize)]
 pub struct FilePreview {
-    file_uuid: String,
-    file_path: String,
-    name: String,
-    size: u64,
-    mime_type: String,
-    preview_base64: Option<String>,
+    pub file_uuid: String,
+    pub file_path: String,
+    pub name: String,
+    pub size: u64,
+    pub mime_type: String,
+    pub preview_base64: Option<String>,
 }
 
 #[derive(Deserialize)]

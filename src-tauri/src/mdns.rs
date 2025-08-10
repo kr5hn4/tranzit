@@ -17,6 +17,9 @@ use std::{
     time::{Duration, Instant},
 };
 use tauri::{AppHandle, Emitter};
+use uuid::Uuid;
+
+pub static APP_UUID: Lazy<String> = Lazy::new(|| Uuid::new_v4().to_string());
 
 // Globals to manage mDNS responder thread and running state
 static MDNS_THREAD: Lazy<Mutex<Option<JoinHandle<()>>>> = Lazy::new(|| Mutex::new(None));
