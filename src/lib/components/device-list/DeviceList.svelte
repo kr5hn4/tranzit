@@ -9,12 +9,13 @@
 
   let os: Platform = platform();
 
+  // Re-discover all the devices with mdns and
+  // send assisted discovery requests to all discovered devices
   async function refreshDevice(): Promise<void> {
     try {
       store.areDevicesRefreshing = true;
 
       const devices: Device[] = await invoke("discover_mdns_services");
-      store.devices = devices;
 
       devices.forEach(async (device) => {
         const ipv4 = await invoke("get_primary_ipv4");
@@ -26,7 +27,13 @@
           osType: store.deviceInfo.os_type,
           port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
           ipv4: ipv4,
+          id: store.deviceInfo.app_id,
         });
+
+        // prevent self discovery by comparing device id's
+        if (device.id === store.deviceInfo.app_id) {
+          return;
+        }
 
         const index = store.devices.findIndex((storedDevice) => {
           return device.ip === storedDevice.ip;
@@ -109,45 +116,13 @@
   }
 
   onMount(async () => {
-    listen("device-offline", async (event) => {
-      const filteredDevices = store.devices.filter(
-        (device) => device.ip !== event.payload,
-      );
-      store.devices = filteredDevices;
-
-      console.info("🔌 Device offline:", event.payload);
-      await invoke("remove_device", { ip: event.payload });
-    });
-
-    listen("assisted-discovery", async (event) => {
-      const index = store.devices.findIndex((device) => {
-        return device.ip === event.payload.ip;
-      });
-
-      if (index === -1) {
-        store.devices.push(event.payload as Device); // Add new
-        await invoke("add_device", { ip: event.payload.ip });
-      }
-    });
-
-    listen("mdns-peer-discovered", async (event) => {
-      const index = store.devices.findIndex((device) => {
-        return device.ip === event.payload.ip;
-      });
-
-      if (index === -1) {
-        store.devices.push(event.payload as Device); // Add new
-        await invoke("add_device", { ip: event.payload.ip });
-      }
-      console.info("mdns peer discovered", event);
-    });
-
     // get sender info
     const deviceInfo: DeviceInfo = await invoke("get_sys_info");
 
     store.deviceInfo = {
       hostname: deviceInfo.hostname,
       os_type: deviceInfo.os_type,
+      app_id: deviceInfo.app_id,
     };
 
     const devices: Device[] = await invoke("discover_mdns_services");
@@ -162,16 +137,62 @@
         osType: store.deviceInfo.os_type,
         port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
         ipv4: ipv4,
+        id: store.deviceInfo.app_id,
       });
 
-      const index = store.devices.findIndex((storedDevice) => {
-        return device.ip === storedDevice.ip;
-      });
+      // const index = store.devices.findIndex((storedDevice) => {
+      //   return device.ip === storedDevice.ip;
+      // });
 
-      if (index === -1) {
-        store.devices.push(device);
-        await invoke("add_device", { ip: device.ip });
+      if (device.id === store.deviceInfo.app_id) {
+        return;
       }
+
+      // if (index === -1) {
+      store.devices.push(device);
+      await invoke("add_device", { ip: device.ip });
+      // }
+    });
+
+    listen("device-offline", async (event) => {
+      const filteredDevices = store.devices.filter(
+        (device) => device.ip !== event.payload,
+      );
+      store.devices = filteredDevices;
+
+      console.info("🔌 Device offline:", event.payload);
+      await invoke("remove_device", { ip: event.payload });
+    });
+
+    listen("assisted-discovery", async (event) => {
+      // const index = store.devices.findIndex((device) => {
+      //   return device.ip === event.payload.ip;
+      // });
+
+      if (event.payload.id === store.deviceInfo.app_id) {
+        return;
+      }
+
+      // if (index === -1) {
+      store.devices.push(event.payload as Device); // Add new
+      await invoke("add_device", { ip: event.payload.ip });
+      // }
+    });
+
+    listen("mdns-peer-discovered", async (event) => {
+      // const index = store.devices.findIndex((device) => {
+      //   return device.ip === event.payload.ip;
+      // });
+
+      if (event.payload.id === store.deviceInfo.app_id) {
+        return;
+      }
+
+      // if (index === -1) {
+      store.devices.push(event.payload as Device); // Add new
+      await invoke("add_device", { ip: event.payload.ip });
+      // }
+      console.info("mdns peer discovered", event);
     });
   });
 </script>

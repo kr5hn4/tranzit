@@ -9,6 +9,7 @@ export type Device = {
   hostname: string;
   service_type: string;
   os: string;
+  id: string;
 };
 
 export type SelectedFiles = {
@@ -53,5 +54,5 @@ export const store = $state<{
   fileTransferRequestQueue: null,
   waitingToAcceptTransferRequest: false,
   selectedFiles: [],
-  deviceInfo: { hostname: "", os_type: "" },
+  deviceInfo: { hostname: "", os_type: "", id: "" },
 });

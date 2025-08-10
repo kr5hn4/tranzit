@@ -9,7 +9,10 @@
   function openUrlInDefaultApp(event: MouseEvent) {
     if (event.target instanceof HTMLAnchorElement) {
       event.preventDefault();
-      openUrl(event.target.href);
+      // open(event.target.href);
+      openUrl("https://tauri.app").catch((e) => {
+        console.error("Failed to open URL:", e);
+      });
     }
   }
 
@@ -107,7 +110,7 @@
         © 2025 <a
           class="info-link"
           on:click={openUrlInDefaultApp}
-          href="https://krishnabiradar.com">Krishna Biradar</a
+          href="https://tauri.app">Krishna Biradar</a
         >
       </p>
       <p class="info-text">
@@ -117,7 +120,7 @@
           class="info-link">Github issues</a
         >.
       </p>
-      <p class="info-text">Support development:</p>
+      <!-- <p class="info-text">Support development:</p> -->
       <a
         href="https://github.com/sponsors/kr5hn4"
         on:click={openUrlInDefaultApp}

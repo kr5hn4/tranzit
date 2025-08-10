@@ -27,6 +27,7 @@ pub async fn assisted_discovery(
     os_type: String,
     port: u16,
     ipv4: String,
+    id: String,
 ) -> Result<String, String> {
     let body = json!({
         "name": hostname,
@@ -35,6 +36,7 @@ pub async fn assisted_discovery(
         "hostname": hostname,
         "service_type": service_type,
         "os": os_type,
+        "id": id
     });
 
     let mut headers = HeaderMap::new();

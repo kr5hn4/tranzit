@@ -25,7 +25,7 @@ pub static APP_UUID: Lazy<String> = Lazy::new(|| Uuid::new_v4().to_string());
 static MDNS_THREAD: Lazy<Mutex<Option<JoinHandle<()>>>> = Lazy::new(|| Mutex::new(None));
 static SHOULD_RUN: Lazy<Arc<AtomicBool>> = Lazy::new(|| Arc::new(AtomicBool::new(false)));
 
-/// Starts the mDNS responder in a background thread
+// Starts the mDNS responder in a background thread
 #[tauri::command]
 pub fn start_mdns_responder() {
     let mut thread_handle = match MDNS_THREAD.lock() {
@@ -64,6 +64,7 @@ pub fn start_mdns_responder() {
             format!("os={}", os_type),
             format!("hostname={}", hostname),
             format!("arch={}", std::env::consts::ARCH),
+            format!("id={}", APP_UUID.to_string()),
         ];
 
         let _svc = responder.register(
@@ -121,6 +122,7 @@ pub struct Peer {
     hostname: String,
     service_type: String,
     os: String,
+    id: String,
 }
 
 // Implement hash + equality based on IP + port to avoid duplicates
@@ -164,6 +166,10 @@ pub async fn discover_mdns_services() -> Result<Vec<Peer>, String> {
                         .get("hostname")
                         .map(|p| p.val_str().to_string())
                         .unwrap_or_else(|| "unknown".into());
+                    let id = props
+                        .get("id")
+                        .map(|p| p.val_str().to_string())
+                        .unwrap_or_else(|| "unknown".into());
 
                     for ip in info.get_addresses() {
                         if ip.is_ipv4() {
@@ -174,6 +180,7 @@ pub async fn discover_mdns_services() -> Result<Vec<Peer>, String> {
                                 hostname: hostname.clone(),
                                 service_type: info.get_type().to_string(),
                                 os: os.clone(),
+                                id: id.clone(),
                             };
                             debug_log!("🗺️ Discovered peer: {:?}", peer);
                             discovered_peers.insert(peer);
@@ -241,6 +248,11 @@ pub fn listen_for_mdns_services(app_handle: AppHandle) {
                         .map(|p| p.val_str().to_string())
                         .unwrap_or_else(|| "unknown".into());
 
+                    let id = props
+                        .get("id")
+                        .map(|p| p.val_str().to_string())
+                        .unwrap_or_else(|| "unknown".into());
+
                     for ip in info.get_addresses() {
                         if ip.is_ipv4() {
                             let peer = Peer {
@@ -250,6 +262,7 @@ pub fn listen_for_mdns_services(app_handle: AppHandle) {
                                 hostname: hostname.clone(),
                                 service_type: info.get_type().to_string(),
                                 os: os.clone(),
+                                id: id.clone(),
                             };
 
                             if discovered.insert(peer.clone()) {
