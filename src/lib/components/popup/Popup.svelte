@@ -3,10 +3,6 @@
 
   export let message;
 
-  const onAccept = async () => {
-    store.showPopup = false;
-  };
-
   const onReject = async () => {
     store.showPopup = false;
   };
