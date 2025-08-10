@@ -47,39 +47,6 @@
   </div>
 </div>
 
-<!-- <div> -->
-<!--   <div -->
-<!--     class="backdrop" -->
-<!--     role="button" -->
-<!--     on:keydown={(e) => { -->
-<!--     }} -->
-<!--   > -->
-<!--     <div class="modal" on:click|stopPropagation> -->
-<!--       <p class="modal-title"> -->
-<!--         Do you want to accept these files from <strong -->
-<!--           >{store.fileTransferRequestQueue?.data.device_info.hostname}</strong -->
-<!--         >? -->
-<!--       </p> -->
-<!--       <p class="modal-title"> -->
-<!--         <strong -->
-<!--           >{store.fileTransferRequestQueue?.data.device_info.os_type}</strong -->
-<!--         > -->
-<!--       </p> -->
-<!---->
-<!--       <ul class="file-list"> -->
-<!--         {#each store.fileTransferRequestQueue?.data.files_info as file} -->
-<!--           <li>{file.name}</li> -->
-<!--         {/each} -->
-<!--       </ul> -->
-<!---->
-<!--       <div class="modal-actions"> -->
-<!--         <button class="accept-btn" on:click={onAccept}>Accept</button> -->
-<!--         <button class="reject-btn" on:click={onReject}>Reject</button> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--   </div> -->
-<!-- </div> -->
-
 <style>
   @import "./style.scss";
 </style>
