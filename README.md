@@ -1,7 +1,7 @@
 # Tranzit
 
 <p align="center">
-  <img src="./static/images/logo.png" alt="Alt text" />
+  <img src="./static/images/logo.png" alt="Tranzit logo" />
 </p>
 
 **Tranzit** is a cross-platform app to share files on your local network.
