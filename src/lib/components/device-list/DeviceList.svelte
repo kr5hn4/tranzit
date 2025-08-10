@@ -9,6 +9,7 @@
 
   let os: Platform = platform();
 
+  // Refresh devices and animate refresh icon
   async function refreshDevices(): Promise<void> {
     try {
       store.areDevicesRefreshing = true;
@@ -64,8 +65,8 @@
       return;
     }
 
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    const fileTransferRequestHeaders = new Headers();
+    fileTransferRequestHeaders.append("Content-Type", "application/json");
 
     const filesArray = store.selectedFiles.map((file) => {
       return {
@@ -83,7 +84,7 @@
     store.showPopup = true;
     playSfx("pop");
 
-    const response = await invoke("file_transfer_request", {
+    const fileTransferRequestResponse = await invoke("file_transfer_request", {
       ip,
       port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
       selectedFiles: filesArray,
@@ -91,14 +92,14 @@
     });
     store.showPopup = false;
 
-    if (response === "rejected") {
+    if (fileTransferRequestResponse === "rejected") {
       store.popupMessage = "File transfer request rejected :(";
       store.showPopup = true;
       playSfx("pop");
       return;
     }
 
-    if (response === "accepted") {
+    if (fileTransferRequestResponse === "accepted") {
       store.showTransferProgressPopup = true;
       const files = store.selectedFiles.map((file) => {
         return {
@@ -108,7 +109,7 @@
         };
       });
 
-      const response = await invoke("upload_files", {
+      const uploadFilesResponse = await invoke("upload_files", {
         files: store.selectedFiles.map((file) => {
           return {
             file_path: file.file_path,
@@ -123,55 +124,46 @@
   }
 
   onMount(async () => {
-    // get sender info
+    // get host device info and save to store
     const deviceInfo: DeviceInfo = await invoke("get_sys_info");
-
-    store.deviceInfo = {
-      hostname: deviceInfo.hostname,
-      os_type: deviceInfo.os_type,
-      app_id: deviceInfo.app_id,
-    };
+    store.deviceInfo = deviceInfo;
 
     await discoverDevices();
 
     listen("device-offline", async (event) => {
+      // filter offline devices from store
       const filteredDevices = store.devices.filter(
         (device) => device.ip !== event.payload,
       );
       store.devices = filteredDevices;
 
       console.info("🔌 Device offline:", event.payload);
+
+      // inform backend to stop sending tcp heartbeats to the offline device
       await invoke("remove_device", { ip: event.payload });
     });
 
-    listen("assisted-discovery", async (event) => {
+    async function saveDeviceToStore(device: Device): Promise<void> {
       const index = store.devices.findIndex((device) => {
-        return device.ip === event.payload.ip;
+        return device.ip === device.ip;
       });
 
-      if (event.payload.id === store.deviceInfo.app_id) {
+      if (device.id === store.deviceInfo.app_id) {
         return;
       }
 
       if (index === -1) {
-        store.devices.push(event.payload as Device); // Add new
-        await invoke("add_device", { ip: event.payload.ip });
+        store.devices.push(device);
+        await invoke("add_device", { ip: device.ip });
       }
+    }
+
+    listen("assisted-discovery", async (event: Event<Device>) => {
+      await saveDeviceToStore(event.payload);
     });
 
-    listen("mdns-peer-discovered", async (event) => {
-      const index = store.devices.findIndex((device) => {
-        return device.ip === event.payload.ip;
-      });
-
-      if (event.payload.id === store.deviceInfo.app_id) {
-        return;
-      }
-
-      if (index === -1) {
-        store.devices.push(event.payload as Device); // Add new
-        await invoke("add_device", { ip: event.payload.ip });
-      }
+    listen("mdns-peer-discovered", async (event: Event<Device>) => {
+      await saveDeviceToStore(event.payload);
       console.info("mdns peer discovered", event);
     });
   });
