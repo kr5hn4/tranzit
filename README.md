@@ -1,5 +1,9 @@
 # Tranzit
 
+<p align="center">
+  <img src="./static/images/logo.png" alt="Alt text" />
+</p>
+
 **Tranzit** is a cross-platform app to share files on your local network.
 
 Website: [https://github.com/kr5hn4/tranzit](https://github.com/kr5hn4/tranzit)
