@@ -1,0 +1,33 @@
+html[data-theme="solarized-dark"] {
+  --theme-bg: #002b36;
+  --theme-surface: #073642;
+  --theme-text-primary: #839496;
+  --theme-text-secondary: #586e75;
+  --theme-divider: #073642;
+  --theme-primary-accent: #268bd2;
+  --theme-primary-accent-text: #fdf6e3;
+  --theme-button-shadow: rgba(38, 139, 210, 0.4);
+  --theme-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --theme-card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  --theme-icon-bg: #073642;
+  --theme-error: #dc322f;
+  --theme-error-text: #fdf6e3;
+  --theme-success: #859900;
+}
+
+html[data-theme="solarized-light"] {
+  --theme-bg: #fdf6e3;
+  --theme-surface: #eee8d5;
+  --theme-text-primary: #657b83;
+  --theme-text-secondary: #93a1a1;
+  --theme-divider: #eee8d5;
+  --theme-primary-accent: #268bd2;
+  --theme-primary-accent-text: #fdf6e3;
+  --theme-button-shadow: rgba(38, 139, 210, 0.3);
+  --theme-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --theme-card-hover-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+  --theme-icon-bg: #fdf6e3;
+  --theme-error: #dc322f;
+  --theme-error-text: #fdf6e3;
+  --theme-success: #859900;
+}

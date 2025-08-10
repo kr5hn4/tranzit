@@ -1,13 +1,10 @@
+/* ===== Fonts ===== */
 @font-face {
   font-family: "Montserrat";
-  src: url("/fonts/Montserrat-Regular.ttf") format("ttf");
+  src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-}
-
-html {
-  --font-family: "Montserrat";
 }
 
 @font-face {
@@ -15,6 +12,12 @@ html {
   src: url("/fonts/MaterialIcons-Regular.ttf") format("truetype");
 }
 
+/* Define a CSS variable for the font family */
+html {
+  --font-family: "Montserrat", sans-serif;
+}
+
+/* ===== Material Icons Styling ===== */
 .material-icons {
   font-family: "Material Icons";
   font-weight: normal;
@@ -28,136 +31,64 @@ html {
   white-space: nowrap;
   direction: ltr;
 
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: "liga";
+  /* Font smoothing for various browsers */
+  -webkit-font-smoothing: antialiased; /* WebKit */
+  text-rendering: optimizeLegibility; /* Safari, Chrome */
+  -moz-osx-font-smoothing: grayscale; /* Firefox */
+  font-feature-settings: "liga"; /* IE */
 }
 
-/*Set up colors for themes*/
-/* Gruvbox Dark */
-html[data-theme="gruvbox-dark"] {
-  --theme-bg: #282828;
-  --theme-surface: #3c3836;
-  --theme-text-primary: #fbf1c7;
-  --theme-text-secondary: #a89984;
-  --theme-divider: #504945;
-  --theme-primary-accent: #8ec07c; /* Gruvbox green */
-  --theme-primary-accent-text: #282828;
-  --theme-button-shadow: rgba(142, 192, 124, 0.4);
-  --theme-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  --theme-card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  --theme-icon-bg: #504945;
-  --theme-error: #fb4934; /* Gruvbox Red */
-  --theme-error-text: #fbf1c7;
-  --theme-success: #b8bb26; /* Gruvbox Green */
-}
-
-/* Gruvbox Light */
-html[data-theme="gruvbox-light"] {
-  --theme-bg: #fbf1c7;
-  --theme-surface: #ebdbb2;
-  --theme-text-primary: #3c3836;
-  --theme-text-secondary: #665c54;
-  --theme-divider: #bdae93;
-  --theme-primary-accent: #8ec07c; /* Gruvbox green */
-  --theme-primary-accent-text: #fbf1c7;
-  --theme-button-shadow: rgba(142, 192, 124, 0.3);
-  --theme-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --theme-card-hover-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
-  --theme-icon-bg: #d5c4a1;
-  --theme-error: #cc241d; /* Gruvbox Red */
-  --theme-error-text: #fbf1c7;
-  --theme-success: #98971a; /* Gruvbox Green */
-}
-
-/* Solarized Dark */
-html[data-theme="solarized-dark"] {
-  --theme-bg: #002b36;
-  --theme-surface: #073642;
-  --theme-text-primary: #839496;
-  --theme-text-secondary: #586e75;
-  --theme-divider: #073642;
-  --theme-primary-accent: #268bd2; /* Solarized blue */
-  --theme-primary-accent-text: #fdf6e3;
-  --theme-button-shadow: rgba(38, 139, 210, 0.4);
-  --theme-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  --theme-card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  --theme-icon-bg: #073642;
-  --theme-error: #dc322f; /* Solarized Red */
-  --theme-error-text: #fdf6e3;
-  --theme-success: #859900; /* Solarized Green */
-}
-
-/* Solarized Light */
-html[data-theme="solarized-light"] {
-  --theme-bg: #fdf6e3;
-  --theme-surface: #eee8d5;
-  --theme-text-primary: #657b83;
-  --theme-text-secondary: #93a1a1;
-  --theme-divider: #eee8d5;
-  --theme-primary-accent: #268bd2; /* Solarized blue */
-  --theme-primary-accent-text: #fdf6e3;
-  --theme-button-shadow: rgba(38, 139, 210, 0.3);
-  --theme-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --theme-card-hover-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
-  --theme-icon-bg: #fdf6e3;
-  --theme-error: #dc322f; /* Solarized Red */
-  --theme-error-text: #fdf6e3;
-  --theme-success: #859900; /* Solarized Green */
-}
-
-/*change default scrollbar styling*/
+/* ===== Scrollbar Styling ===== */
 html::-webkit-scrollbar {
   width: 10px;
   background-clip: content-box;
 }
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-::-webkit-scrollbar-thumb {
-  background: var(--theme-divider);
-  border-radius: 4px;
-}
+
 html::-webkit-scrollbar-track {
   background: #e7e7e7;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
+::-webkit-scrollbar-thumb {
+  background: var(--theme-divider);
+  border-radius: 4px;
+}
+
 html::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  /*border: 1px solid #cacaca;*/
   border: 3px solid transparent;
   background: #d55959;
 }
 
+/* ===== Base Body Styles ===== */
 body {
   background-color: var(--theme-bg);
   color: var(--theme-text-primary);
   font-family: var(--font-family);
   font-size: 16px;
   margin: 0;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   cursor: default;
   -webkit-tap-highlight-color: transparent;
-  /*add transition effect to background color change while changing themes and
-* switching between dark/light mode */
+
+  /* Smooth background color transition when switching themes */
   transition: background-color 250ms linear;
 }
 
+/* ===== Global User Select Disable ===== */
 * {
-  -webkit-user-select: none; /* WebKit (including GTK) */
+  -webkit-user-select: none; /* Safari, Chrome */
   user-select: none;
 }

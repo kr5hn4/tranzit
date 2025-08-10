@@ -1,0 +1,38 @@
+/* ===== Theme Colors ===== */
+
+/* Common theme variables (optional) */
+/* Could be moved here if shared */
+
+html[data-theme="gruvbox-dark"] {
+  --theme-bg: #282828;
+  --theme-surface: #3c3836;
+  --theme-text-primary: #fbf1c7;
+  --theme-text-secondary: #a89984;
+  --theme-divider: #504945;
+  --theme-primary-accent: #8ec07c;
+  --theme-primary-accent-text: #282828;
+  --theme-button-shadow: rgba(142, 192, 124, 0.4);
+  --theme-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --theme-card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  --theme-icon-bg: #504945;
+  --theme-error: #fb4934;
+  --theme-error-text: #fbf1c7;
+  --theme-success: #b8bb26;
+}
+
+html[data-theme="gruvbox-light"] {
+  --theme-bg: #fbf1c7;
+  --theme-surface: #ebdbb2;
+  --theme-text-primary: #3c3836;
+  --theme-text-secondary: #665c54;
+  --theme-divider: #bdae93;
+  --theme-primary-accent: #8ec07c;
+  --theme-primary-accent-text: #fbf1c7;
+  --theme-button-shadow: rgba(142, 192, 124, 0.3);
+  --theme-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --theme-card-hover-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+  --theme-icon-bg: #d5c4a1;
+  --theme-error: #cc241d;
+  --theme-error-text: #fbf1c7;
+  --theme-success: #98971a;
+}
