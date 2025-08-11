@@ -11,6 +11,6 @@ macro_rules! debug_log {
 #[macro_export]
 macro_rules! debug_log {
     ($($arg:tt)*) => {
-        // no-op in release builds
+        () // no-op in release builds
     };
 }
