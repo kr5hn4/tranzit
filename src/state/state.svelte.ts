@@ -54,5 +54,5 @@ export const store = $state<{
   fileTransferRequestQueue: null,
   waitingToAcceptTransferRequest: false,
   selectedFiles: [],
-  deviceInfo: { hostname: "", os_type: "", id: "" },
+  deviceInfo: { hostname: "", os_type: "", app_id: "" },
 });
