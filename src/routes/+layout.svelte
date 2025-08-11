@@ -3,7 +3,13 @@
   import TransferProgressPopup from "$lib/components/transfer-progress-popup/TransferProgressPopup.svelte";
   import TransferRequestPopup from "$lib/components/transfer-request-popup/TransferRequestPopup.svelte";
   import type { DeviceInfo } from "$lib/types/deviceInfo";
-  import { applyTheme } from "$lib/utils/utils";
+  import {
+    applyTheme,
+    VALID_COLORSCHEMES,
+    VALID_SFX,
+    VALID_THEMES,
+    validateLocalStorageItem,
+  } from "$lib/utils/utils";
   import { store } from "../state/state.svelte";
   import { invoke } from "@tauri-apps/api/core";
   import { listen, type Event } from "@tauri-apps/api/event";
@@ -13,6 +19,12 @@
   let { children } = $props();
 
   onMount(async () => {
+    (function validateLocalStorage(): void {
+      validateLocalStorageItem("theme", VALID_THEMES, "light");
+      validateLocalStorageItem("colorscheme", VALID_COLORSCHEMES, "gruvbox");
+      validateLocalStorageItem("isSfxEnabled", VALID_SFX, "true");
+    })();
+
     await invoke("start_http_server");
     await invoke("start_mdns_responder");
 

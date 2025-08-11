@@ -32,3 +32,31 @@ export function applyTheme() {
     );
   }
 }
+
+type Theme = "light" | "dark";
+type ColorScheme = "gruvbox" | "solarized";
+type SfxEnabled = "true" | "false";
+
+interface LocalStorageDefaults {
+  theme: Theme;
+  colorscheme: ColorScheme;
+  isSfxEnabled: SfxEnabled;
+}
+
+export const VALID_THEMES: Theme[] = ["light", "dark"];
+export const VALID_COLORSCHEMES: ColorScheme[] = ["gruvbox", "solarized"];
+export const VALID_SFX: SfxEnabled[] = ["true", "false"];
+
+// validate all the data stored in localstorage,
+// if the values are not valid, set them to default values
+export function validateLocalStorageItem<K extends keyof LocalStorageDefaults>(
+  key: K,
+  validValues: LocalStorageDefaults[K][],
+  defaultValue: LocalStorageDefaults[K],
+): void {
+  const value = localStorage.getItem(key) as LocalStorageDefaults[K] | null;
+  if (!value || !validValues.includes(value)) {
+    localStorage.setItem(key, defaultValue);
+    console.warn(`Invalid ${key} value. Reset to "${defaultValue}".`);
+  }
+}
