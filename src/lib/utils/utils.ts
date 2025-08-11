@@ -33,9 +33,9 @@ export function applyTheme() {
   }
 }
 
-type Theme = "light" | "dark";
-type ColorScheme = "gruvbox" | "solarized";
-type SfxEnabled = "true" | "false";
+export type Theme = "light" | "dark";
+export type ColorScheme = "gruvbox" | "solarized";
+export type SfxEnabled = "true" | "false";
 
 interface LocalStorageDefaults {
   theme: Theme;

@@ -6,14 +6,11 @@
 
   onMount(async () => {});
 
-  function openUrlInDefaultApp(event: MouseEvent) {
-    if (event.target instanceof HTMLAnchorElement) {
-      event.preventDefault();
-      // open(event.target.href);
-      openUrl("https://tauri.app").catch((e) => {
-        console.error("Failed to open URL:", e);
-      });
-    }
+  function openUrlInDefaultApp(event: Event, url: string) {
+    event.preventDefault();
+    openUrl(url).catch((e) => {
+      console.error("Failed to open URL:", e);
+    });
   }
 
   let theme: string = localStorage.getItem("theme") ?? "dark";
@@ -109,13 +106,18 @@
       <p class="info-text">
         © 2025 <a
           class="info-link"
-          on:click={openUrlInDefaultApp}
-          href="https://tauri.app">Krishna Biradar</a
+          on:click={(event) =>
+            openUrlInDefaultApp(event, "https://krishnabiradar.com")}
+          href="https://krishnabiradar.com">Krishna Biradar</a
         >
       </p>
       <p class="info-text">
         Bug reports and feature requests 👉 <a
-          on:click={openUrlInDefaultApp}
+          on:click={(event) =>
+            openUrlInDefaultApp(
+              event,
+              "https://github.com/kr5hn4/tranzit/issues",
+            )}
           href="https://github.com/kr5hn4/tranzit/issues"
           class="info-link">Github issues</a
         >.
@@ -123,14 +125,16 @@
       <!-- <p class="info-text">Support development:</p> -->
       <a
         href="https://github.com/sponsors/kr5hn4"
-        on:click={openUrlInDefaultApp}
+        on:click={(event) =>
+          openUrlInDefaultApp(event, "https://github.com/sponsors/kr5hn4")}
         class="info-link">Github sponsor Link</a
       >
       <br />
       <div style="padding-top:5px">
         <a
           href="https://buymeacoffee.com/kr5hn4"
-          on:click={openUrlInDefaultApp}
+          on:click={(event) =>
+            openUrlInDefaultApp(event, "https://buymeacoffee.com/kr5hn4")}
           class="info-link"
         >
           <img
