@@ -27,19 +27,6 @@
         >
       </p>
     </div>
-    <div class="transfer-animation-container">
-      <div class="device-graphic sender">
-        <i class="material-icons">phone_android</i>
-      </div>
-      <div class="transfer-path">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
-      <div class="device-graphic receiver">
-        <i class="material-icons">phone_android</i>
-      </div>
-    </div>
     <div class="file-list-container">
       <ul class="file-list">
         {#each store.selectedFiles as file}
@@ -54,10 +41,14 @@
                 ></div>
               </div>
             </div>
-            {#if file.progress < 100}
-              <span class="progress-text">{file.progress}%</span>
+            {#if file.progress}
+              {#if file.progress < 100}
+                <span class="progress-text">{file.progress}%</span>
+              {:else}
+                <span class="progress-text">Done</span>
+              {/if}
             {:else}
-              <span class="progress-text">Done</span>
+              <span class="progress-text">undefined</span>
             {/if}
           </li>
         {/each}
