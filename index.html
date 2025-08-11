@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tranzit - LAN File Transfer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Gruvbox theme colors */
+      :root {
+        --gruvbox-bg: #282828;
+        --gruvbox-bg-soft: #3c3836;
+        --gruvbox-bg-hover: #504945;
+        --gruvbox-text: #ebdbb2;
+        --gruvbox-muted: #a89984;
+        --gruvbox-yellow: #fabd2f;
+        --gruvbox-blue: #83a598;
+        --gruvbox-green: #b8bb26;
+        --gruvbox-red: #fb4934;
+        --gruvbox-orange: #fe8019;
+      }
+
+      .selected-tab {
+        background-color: var(--gruvbox-bg-hover) !important;
+      }
+
+      @keyframes wave {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .logo-wave {
+        animation: wave 2s infinite;
+      }
+    </style>
+  </head>
+  <body class="bg-[var(--gruvbox-bg)] text-[var(--gruvbox-text)]">
+    <!-- Navbar -->
+    <nav class="p-4 bg-[var(--gruvbox-bg-soft)]">
+      <div
+        class="container mx-auto max-w-5xl flex items-center justify-center space-x-6"
+      >
+        <a
+          href="#about"
+          class="text-[var(--gruvbox-muted)] hover:text-[var(--gruvbox-yellow)] px-4"
+          >About</a
+        >
+        <a
+          href="#faq"
+          class="text-[var(--gruvbox-muted)] hover:text-[var(--gruvbox-yellow)] px-4"
+          >FAQ</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero/Downloads Section -->
+    <section id="downloads" class="py-20 px-4 text-center">
+      <div class="container mx-auto max-w-4xl">
+        <img
+          src="logo.png"
+          alt="Logo"
+          class="h-64 w-64 mx-auto mb-4 logo-wave"
+        />
+        <p class="text-[var(--gruvbox-muted)] mb-8">
+          The easiest way to transfer files across your devices.
+        </p>
+
+        <div class="flex justify-center space-x-4 mb-8">
+          <button
+            class="tab-link bg-[var(--gruvbox-bg-soft)] hover:bg-[var(--gruvbox-bg-hover)] text-[var(--gruvbox-text)] font-bold p-4 rounded-lg flex flex-col items-center w-32 h-28 justify-center"
+            data-tab="windows"
+          >
+            <svg
+              class="w-12 h-12 mb-2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12 0c-6.626 0-12 5.373-12 12..." />
+            </svg>
+            <span>Windows</span>
+          </button>
+
+          <button
+            class="tab-link bg-[var(--gruvbox-bg-soft)] hover:bg-[var(--gruvbox-bg-hover)] text-[var(--gruvbox-text)] font-bold p-4 rounded-lg flex flex-col items-center w-32 h-28 justify-center"
+            data-tab="mac"
+          >
+            <svg
+              class="w-12 h-12 mb-2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12.15,2.5a9.65..." />
+            </svg>
+            <span>macOS</span>
+          </button>
+
+          <button
+            class="tab-link bg-[var(--gruvbox-bg-soft)] hover:bg-[var(--gruvbox-bg-hover)] text-[var(--gruvbox-text)] font-bold p-4 rounded-lg flex flex-col items-center w-32 h-28 justify-center"
+            data-tab="linux"
+          >
+            <svg
+              class="w-12 h-12 mb-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+            >
+              <path d="M12,2.5a9.5,9.5..." />
+            </svg>
+            <span>Linux</span>
+          </button>
+
+          <button
+            class="tab-link bg-[var(--gruvbox-bg-soft)] hover:bg-[var(--gruvbox-bg-hover)] text-[var(--gruvbox-text)] font-bold p-4 rounded-lg flex flex-col items-center w-32 h-28 justify-center"
+            data-tab="android"
+          >
+            <svg
+              class="w-12 h-12 mb-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+            >
+              <path d="M17.3,5.4a1,1..." />
+            </svg>
+            <span>Android</span>
+          </button>
+        </div>
+
+        <div
+          id="tab-content"
+          class="bg-[var(--gruvbox-bg-soft)] p-8 rounded-lg"
+        >
+          <div id="windows" class="tab-pane">
+            <a
+              href="#"
+              class="inline-block transform hover:scale-105 transition-transform duration-200"
+            >
+              <img
+                src="https://get.microsoft.com/images/en-us%20dark.svg"
+                alt="Download from Microsoft Store"
+                class="h-12"
+              />
+            </a>
+          </div>
+          <div id="mac" class="tab-pane hidden">
+            <a
+              href="#"
+              class="bg-[var(--gruvbox-blue)] hover:bg-[var(--gruvbox-bg-hover)] text-white font-bold py-2 px-4 rounded"
+              >Download for macOS</a
+            >
+          </div>
+          <div id="linux" class="tab-pane hidden">
+            <a
+              href="#"
+              class="bg-[var(--gruvbox-green)] hover:bg-[var(--gruvbox-bg-hover)] text-white font-bold py-2 px-4 rounded"
+              >Download for Linux</a
+            >
+          </div>
+          <div id="android" class="tab-pane hidden">
+            <a
+              href="#"
+              class="bg-[var(--gruvbox-orange)] hover:bg-[var(--gruvbox-bg-hover)] text-white font-bold py-2 px-4 rounded"
+              >Download for Android</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4">
+      <div class="container mx-auto text-center max-w-4xl">
+        <h2 class="text-3xl font-bold mb-8 text-[var(--gruvbox-yellow)]">
+          About Tranzit
+        </h2>
+        <p class="text-[var(--gruvbox-muted)] max-w-2xl mx-auto mb-8">
+          Tranzit is a free and open-source application that allows you to
+          seamlessly transfer files between devices on your local network. It's
+          fast, secure, and easy to use.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-[var(--gruvbox-bg-soft)] p-6 rounded-lg">
+            <img
+              src="screenshot1.png"
+              alt="App Screenshot"
+              class="rounded-lg"
+            />
+          </div>
+          <div class="bg-[var(--gruvbox-bg-soft)] p-6 rounded-lg">
+            <img
+              src="screenshot2.png"
+              alt="App Screenshot"
+              class="rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 px-4">
+      <div class="container mx-auto max-w-2xl">
+        <h2
+          class="text-3xl font-bold text-center mb-8 text-[var(--gruvbox-yellow)]"
+        >
+          Frequently Asked Questions
+        </h2>
+        <div class="space-y-4" id="faq-container">
+          <div class="bg-[var(--gruvbox-bg-soft)] rounded-lg">
+            <button
+              class="w-full flex justify-between items-center p-4 font-bold text-left"
+            >
+              <span>How do I use Tranzit?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer hidden p-4 text-[var(--gruvbox-muted)]">
+              A: Just open the app on both devices and they will automatically
+              connect.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="text-center py-8 border-t border-[var(--gruvbox-bg-hover)] mt-12"
+    >
+      <div class="container mx-auto text-[var(--gruvbox-muted)]">
+        <p class="mb-4">
+          Copyright &copy; 2025
+          <a
+            href="https://krishnabiradar.com"
+            class="text-[var(--gruvbox-yellow)] hover:underline"
+            >Krishna Biradar</a
+          >
+        </p>
+        <div class="flex justify-center items-center space-x-4 mt-8">
+          <a href="#" class="px-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+            >
+              <path d="M12 0c-6.626..." />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const tabLinks = document.querySelectorAll(".tab-link");
+      const tabPanes = document.querySelectorAll(".tab-pane");
+
+      function getOS() {
+        const userAgent = window.navigator.userAgent;
+        if (userAgent.indexOf("Win") != -1) return "windows";
+        if (userAgent.indexOf("Mac") != -1) return "mac";
+        if (userAgent.indexOf("Linux") != -1) return "linux";
+        if (userAgent.indexOf("Android") != -1) return "android";
+        return "windows";
+      }
+
+      function switchTab(tab) {
+        tabLinks.forEach((link) => {
+          if (link.dataset.tab === tab) {
+            link.classList.add("selected-tab");
+          } else {
+            link.classList.remove("selected-tab");
+          }
+        });
+
+        tabPanes.forEach((pane) => {
+          if (pane.id === tab) {
+            pane.classList.remove("hidden");
+          } else {
+            pane.classList.add("hidden");
+          }
+        });
+      }
+
+      tabLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          switchTab(link.dataset.tab);
+        });
+      });
+
+      switchTab(getOS());
+
+      document
+        .getElementById("faq-container")
+        .addEventListener("click", (e) => {
+          const button = e.target.closest("button");
+          if (!button) return;
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector(".faq-icon");
+          answer.classList.toggle("hidden");
+          icon.textContent = answer.classList.contains("hidden") ? "+" : "-";
+        });
+    </script>
+  </body>
+</html>
