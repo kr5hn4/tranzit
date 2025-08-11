@@ -91,7 +91,7 @@ pub fn generate_tls_certs_to_disk() -> Result<(PathBuf, PathBuf), Box<dyn std::e
     let key_pem = cert_key.signing_key.serialize_pem(); // Correct method
 
     // Write to ./certs next to executable
-    let exe_dir = std::env::current_exe()?.parent().unwrap().to_path_buf();
+    let exe_dir = std::env::temp_dir();
     let certs_dir = exe_dir.join("certs");
     std::fs::create_dir_all(&certs_dir)?;
 
