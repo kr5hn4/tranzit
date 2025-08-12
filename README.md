@@ -6,6 +6,11 @@
 
 Website: [https://github.com/kr5hn4/tranzit](https://github.com/kr5hn4/tranzit)
 
+## Screenshots
+
+<img src="https://kr5hn4.github.io/tranzit/images/screenshot-2.png" />
+<img src="https://kr5hn4.github.io/tranzit/images/screenshot-2.png" />
+
 ## 📥 Download
 
 | Platform | Link           |
