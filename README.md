@@ -8,8 +8,7 @@ Website: [https://github.com/kr5hn4/tranzit](https://github.com/kr5hn4/tranzit)
 
 ## Screenshots
 
-<img src="https://kr5hn4.github.io/tranzit/images/screenshot-2.png" />
-<img src="https://kr5hn4.github.io/tranzit/images/screenshot-2.png" />
+<img src="https://kr5hn4.github.io/tranzit/images/screenshot-2.png" width="300"/> <img src="https://kr5hn4.github.io/tranzit/images/screenshot-3.png" width="700"/>
 
 ## 📥 Download
 
