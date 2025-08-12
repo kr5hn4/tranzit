@@ -143,18 +143,18 @@
       await invoke("remove_device", { ip: event.payload });
     });
 
-    async function saveDeviceToStore(device: Device): Promise<void> {
+    async function saveDeviceToStore(discoveredDevice: Device): Promise<void> {
       const index = store.devices.findIndex((device) => {
-        return device.ip === device.ip;
+        return discoveredDevice.ip === device.ip;
       });
 
-      if (device.id === store.deviceInfo.app_id) {
+      if (discoveredDevice.id === store.deviceInfo.app_id) {
         return;
       }
 
       if (index === -1) {
-        store.devices.push(device);
-        await invoke("add_device", { ip: device.ip });
+        store.devices.push(discoveredDevice);
+        await invoke("add_device", { ip: discoveredDevice.ip });
       }
     }
 
