@@ -9,6 +9,17 @@
     "beforeBuildCommand": "npm run build",
     "frontendDist": "../build"
   },
+  "bundle": {
+    "active": true,
+    "targets": "nsis",
+    "icon": ["icons/icon.ico"],
+    "windows": {
+      "nsis": {
+        "installMode": "both",
+        "installerHooks": "windows/hooks.nsh"
+      }
+    }
+  },
   "app": {
     "windows": [
       {
