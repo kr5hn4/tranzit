@@ -23,7 +23,7 @@ type DiscoveredDevices = Lazy<Mutex<HashMap<String, TrackedDevice>>>;
 static DEVICES: DiscoveredDevices = Lazy::new(|| Mutex::new(HashMap::new()));
 
 // TCP heartbeat server port.
-const PORT: u16 = 4000;
+const PORT: u16 = 21112;
 const HEARTBEAT_INTERVAL: Duration = Duration::from_secs(10);
 const HEARTBEAT_TIMEOUT: Duration = Duration::from_secs(10);
 
