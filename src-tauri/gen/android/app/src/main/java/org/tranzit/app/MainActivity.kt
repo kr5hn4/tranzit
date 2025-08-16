@@ -1,4 +1,4 @@
-package com.tranzit.app
+package org.tranzit.app
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
