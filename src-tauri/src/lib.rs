@@ -9,6 +9,7 @@ mod util_android;
 
 use once_cell::sync::OnceCell;
 use tauri::AppHandle;
+use tauri::Builder;
 
 #[cfg(target_os = "android")]
 use crate::util_android::get_file_infos_with_previews;
@@ -20,10 +21,7 @@ static APP_HANDLE: OnceCell<AppHandle> = OnceCell::new();
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub async fn run() {
-    tauri::Builder::default()
-        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
-            // Write your code here...
-        }))
+    let mut app = Builder::default()
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_store::Builder::new().build())
@@ -62,7 +60,17 @@ pub async fn run() {
             mdns::listen_for_mdns_services(app.handle().clone());
 
             Ok(())
-        })
-        .run(tauri::generate_context!())
+        });
+
+    // Only add single instance on desktop platforms
+    #[cfg(all(
+        any(target_os = "linux", target_os = "macos", target_os = "windows"),
+        not(debug_assertions)
+    ))]
+    {
+        app = app.plugin(tauri_plugin_single_instance::init(|app, args, cwd| {}));
+    }
+
+    app.run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
