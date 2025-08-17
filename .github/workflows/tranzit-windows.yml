@@ -1,0 +1,39 @@
+name: Tranzit (Windows Installer - NSIS)
+
+on:
+  workflow_dispatch:   # manual trigger only
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Install Tauri CLI globally
+        run: npm install --global @tauri-apps/cli
+
+      # 🟦 Build step
+      - name: Build Tauri app (Windows NSIS exe)
+        run: npm run tauri build
+
+      # Upload the NSIS exe installer as an artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-windows-installer-exe
+          path: src-tauri/target/release/bundle/nsis/*.exe
+          if-no-files-found: error
+
