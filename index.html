@@ -132,17 +132,31 @@
           class="bg-[var(--gruvbox-bg-soft)] p-8 rounded-lg"
         >
           <!-- Windows -->
+
           <div data-tab="windows" class="tab-pane">
-            <a
-              href="#"
-              class="inline-block transform hover:scale-105 transition-transform duration-200"
+            <div
+              class="flex flex-col md:flex-row gap-4 items-center justify-center"
             >
-              <img
-                src="images/microsoft-store.svg"
-                alt="Download from Microsoft Store"
-                class="h-12"
-              />
-            </a>
+              <a
+                href="#"
+                class="inline-block transform hover:scale-105 transition-transform duration-200"
+              >
+                <img
+                  src="images/microsoft-store.svg"
+                  alt="Download from Microsoft Store"
+                  class="h-12"
+                />
+              </a>
+              <a
+                href="https://github.com/kr5hn4/tranzit/releases/latest/download/tranzit_0.1.0_x64-setup.exe"
+                class="flex items-center gap-2 bg-[var(--gruvbox-blue)] hover:bg-[var(--gruvbox-bg-hover)] text-white font-bold py-2 px-4 rounded"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 16l4-5h-3V4h-2v7H8l4 5zm-8 2v2h16v-2H4z" />
+                </svg>
+                Download .exe
+              </a>
+            </div>
           </div>
 
           <!-- macOS -->
@@ -164,7 +178,7 @@
           <div data-tab="linux" class="tab-pane hidden">
             <div class="flex justify-center">
               <a
-                href="#"
+                href="https://github.com/kr5hn4/tranzit/releases/latest/download/tranzit_0.1.0_amd64.AppImage"
                 class="flex items-center gap-2 bg-[var(--gruvbox-blue)] hover:bg-[var(--gruvbox-bg-hover)] text-white font-bold py-2 px-4 rounded"
               >
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
