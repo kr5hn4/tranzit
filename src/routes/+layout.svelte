@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Popup from "$lib/components/popup/Popup.svelte";
+  import GenericPopup from "$lib/components/generic-popup/GenericPopup.svelte";
   import TransferProgressPopup from "$lib/components/transfer-progress-popup/TransferProgressPopup.svelte";
   import TransferRequestPopup from "$lib/components/transfer-request-popup/TransferRequestPopup.svelte";
   import type { DeviceInfo } from "$lib/types/deviceInfo";
@@ -84,7 +84,7 @@
     <TransferProgressPopup />
   {/if}
   {#if store.showPopup}
-    <Popup message={store.popupMessage} />
+    <GenericPopup message={store.popupMessage} />
   {/if}
 
   {@render children()}
