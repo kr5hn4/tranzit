@@ -1,106 +1,53 @@
-$border-radius-large: 16px;
-$border-radius-medium: 8px;
-$border-radius-small: 6px;
-
-$padding-xsmall: 8px;
-$padding-small: 12px;
-$padding-medium: 16px;
-$padding-large: 24px;
-$padding-xlarge: 32px;
-
-$font-size-base: 1rem;
-$font-size-small: 0.9rem;
-$font-size-large: 1.5rem;
-$font-size-icon: 48px;
-$font-size-file-icon: 20px;
-
-$transition-duration: 0.1s;
-
-$color-surface: var(--theme-surface);
-$color-text-primary: var(--theme-text-primary);
-$color-text-secondary: var(--theme-text-secondary);
-$color-primary-accent: var(--theme-primary-accent);
-$color-success: var(--theme-success);
-$color-error: var(--theme-error);
-$color-primary-accent-text: var(--theme-primary-accent-text);
-$color-divider: var(--theme-divider);
-$overlay-bg: rgba(0, 0, 0, 0.5);
-$file-list-bg: rgba(0, 0, 0, 0.1);
-
-// Mixins
-@mixin flex-center($direction: row, $justify: center, $align: center) {
-  display: flex;
-  flex-direction: $direction;
-  justify-content: $justify;
-  align-items: $align;
-}
-
-@mixin button-base {
-  border: none;
-  border-radius: $border-radius-medium;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: $font-size-base;
-  padding: $padding-small $padding-xlarge;
-  transition: opacity $transition-duration ease;
-}
+@use '../common';
 
 @mixin scrollable-container($max-height) {
   max-height: $max-height;
   overflow-y: auto;
-  background-color: $file-list-bg;
-  border-radius: $border-radius-medium;
-  padding: $padding-xsmall;
-  margin-bottom: $padding-large;
-  border: 1px solid $color-divider;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: common.$border-radius-medium;
+  padding: 8px;
+  margin-bottom: 24px;
+  border: 1px solid common.$color-divider;
 }
 
 // Styles
 .popup-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: $overlay-bg;
+  @extend .popup-overlay-base;
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(10px);
-  @include flex-center(row, center, center);
-  padding: $padding-medium;
-  z-index: 9999;
+  padding: 16px;
 }
 
 .popup-card {
-  background-color: $color-surface;
-  color: $color-text-primary;
-  border-radius: $border-radius-large;
-  padding: $padding-xlarge;
-  width: 100%;
+  @extend .popup-card-base;
+  padding: 32px;
   max-width: 420px;
-  box-shadow: var(--theme-card-shadow);
-  animation: popup-fade-in $transition-duration ease-out;
-  user-select: none;
+  animation: popup-fade-in 0.1s ease-out;
 
   .popup-header {
     text-align: center;
-    margin-bottom: $padding-large;
+    margin-bottom: 24px;
 
     .popup-icon {
-      font-size: $font-size-icon;
-      color: $color-primary-accent;
+      font-size: 48px;
+      color: common.$color-primary-accent;
     }
 
     .popup-title {
-      font-size: $font-size-large;
+      font-size: 1.5rem;
       font-weight: 500;
-      margin: $padding-xsmall 0 $padding-small 0;
+      margin: 8px 0 12px 0;
     }
   }
 
   .sender-info {
-    font-size: $font-size-base;
-    color: $color-text-secondary;
+    font-size: common.$font-size-base;
+    color: common.$color-text-secondary;
     margin: 0;
 
     strong {
-      color: $color-text-primary;
+      color: common.$color-text-primary;
       font-weight: 500;
     }
   }
@@ -116,18 +63,18 @@ $file-list-bg: rgba(0, 0, 0, 0.1);
   }
 
   .file-item {
-    @include flex-center(row, flex-start, center);
-    padding: $padding-small;
-    border-radius: $border-radius-small;
+    @include common.flex-center(row, flex-start, center);
+    padding: 12px;
+    border-radius: 6px;
 
     &:not(:last-child) {
-      border-bottom: 1px solid $color-divider;
+      border-bottom: 1px solid common.$color-divider;
     }
 
     .file-icon {
-      font-size: $font-size-file-icon;
+      font-size: 20px;
       margin-right: 16px;
-      color: $color-text-secondary;
+      color: common.$color-text-secondary;
     }
   }
 
@@ -137,7 +84,11 @@ $file-list-bg: rgba(0, 0, 0, 0.1);
     gap: 16px;
 
     .popup-button {
-      @include button-base;
+      @include common.button-base;
+      border: none;
+      border-radius: common.$border-radius-medium;
+      padding: 12px 32px;
+      transition: opacity 0.1s ease;
 
       &:hover {
         opacity: 0.9;
@@ -145,25 +96,13 @@ $file-list-bg: rgba(0, 0, 0, 0.1);
     }
 
     .accept {
-      background-color: $color-success;
-      color: $color-primary-accent-text;
+      background-color: var(--theme-success);
+      color: var(--theme-primary-accent-text);
     }
 
     .reject {
-      background-color: $color-error;
-      color: $color-primary-accent-text;
+      background-color: common.$color-error;
+      color: var(--theme-primary-accent-text);
     }
-  }
-}
-
-// Animation
-@keyframes popup-fade-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }

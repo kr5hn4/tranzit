@@ -1,110 +1,56 @@
-$border-radius-large: 16px;
-$border-radius-medium: 8px;
-
-$padding-small: 12px;
-$padding-medium: 16px;
-$padding-large: 24px;
-$padding-xlarge: 32px;
-
-$font-size-base: 1rem;
-$font-size-large: 1.5rem;
-$font-size-icon: 48px;
-
-$transition-duration: 0.1s;
-
-$color-surface: var(--theme-surface);
-$color-text-primary: var(--theme-text-primary);
-$color-text-secondary: var(--theme-text-secondary);
-$color-error: var(--theme-error);
-$color-error-text: var(--theme-error-text);
-$color-card-shadow: var(--theme-card-shadow);
-$overlay-bg: rgba(0, 0, 0, 0.6);
-
-// Mixins
-@mixin flex-center($direction: row, $justify: center, $align: center) {
-  display: flex;
-  flex-direction: $direction;
-  justify-content: $justify;
-  align-items: $align;
-}
-
-@mixin button-base {
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: $font-size-base;
-  transition: opacity $transition-duration ease;
-}
+@use '../common';
 
 // Styles
 .popup-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: $overlay-bg;
-  @include flex-center(row, center, center);
-  padding: $padding-medium;
+  @extend .popup-overlay-base;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 16px;
   -webkit-backdrop-filter: blur(10px);
-  z-index: 9999;
 }
 
 .popup-card {
-  background-color: $color-surface;
-  color: $color-text-primary;
-  border-radius: $border-radius-large;
-  padding: $padding-xlarge;
-  width: 100%;
+  @extend .popup-card-base;
+  padding: 32px;
   max-width: 400px;
-  box-shadow: $color-card-shadow;
   text-align: center;
-  animation: popup-fade-in $transition-duration ease-out;
-  user-select: none;
+  animation: popup-fade-in 0.1s ease-out;
 
   .popup-header {
-    @include flex-center(column, center, center);
-    margin-bottom: $padding-medium;
+    @include common.flex-center(column, center, center);
+    margin-bottom: 16px;
 
     .popup-icon {
-      font-size: $font-size-icon;
-      color: $color-error;
-      margin-bottom: $padding-medium;
+      font-size: 48px;
+      color: common.$color-error;
+      margin-bottom: 16px;
     }
 
     .popup-title {
-      font-size: $font-size-large;
+      font-size: 1.5rem;
       font-weight: 500;
       margin: 0;
     }
   }
 
   .popup-message {
-    font-size: $font-size-base;
-    color: $color-text-secondary;
+    font-size: common.$font-size-base;
+    color: common.$color-text-secondary;
     line-height: 1.5;
-    margin: 0 0 $padding-xlarge 0;
+    margin: 0 0 32px 0;
   }
 
   .popup-dismiss-button {
-    @include button-base;
-    background-color: $color-error;
-    color: $color-error-text;
-    padding: $padding-small $padding-large;
-    border-radius: $border-radius-medium;
+    @include common.button-base;
+    border: none;
+    transition: opacity 0.1s ease;
+    background-color: common.$color-error;
+    color: var(--theme-error-text);
+    padding: 12px 24px;
+    border-radius: common.$border-radius-medium;
     width: 100%;
 
     &:hover {
       opacity: 0.9;
     }
-  }
-}
-
-// Animations
-@keyframes popup-fade-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }

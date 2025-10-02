@@ -1,47 +1,17 @@
-$padding-small: 8px;
-$padding-medium: 20px;
-$padding-large-vertical: 24px;
-$padding-large-horizontal: 24px;
-
-$font-size-base: 1rem;
-$font-size-small: 0.9rem;
-$font-size-large: 1.1rem;
-
-$border-radius: 16px;
-$border-radius-circle: 50%;
-
-$transition-duration: 0.35s;
-$animation-duration-spin: 1s;
-
-$color-text-primary: var(--theme-text-primary);
-$color-text-secondary: var(--theme-text-secondary);
-$color-divider: var(--theme-divider);
-$color-surface: var(--theme-surface);
-$color-icon-bg: var(--theme-icon-bg);
-$color-primary-accent: var(--theme-primary-accent);
-$color-card-shadow: var(--theme-card-shadow);
-$color-card-hover-shadow: var(--theme-card-hover-shadow);
-
-// Mixins
-@mixin flex-center($direction: row, $justify: center, $align: center) {
-  display: flex;
-  flex-direction: $direction;
-  justify-content: $justify;
-  align-items: $align;
-}
+@use '../common';
 
 @mixin button-reset {
   background: none;
   border: none;
   cursor: pointer;
-  padding: $padding-small;
-  color: $color-text-secondary;
+  padding: 8px;
+  color: common.$color-text-secondary;
   user-select: none;
 }
 
 @mixin box-shadow($shadow) {
   box-shadow: $shadow;
-  transition: box-shadow $transition-duration ease;
+  transition: box-shadow 0.35s ease;
 }
 
 // Styles
@@ -55,16 +25,16 @@ $color-card-hover-shadow: var(--theme-card-hover-shadow);
 }
 
 .device-section-header {
-  @include flex-center(row, space-between, center);
-  padding: $padding-large-vertical 0 16px 0;
-  border-top: 1px solid $color-divider;
-  margin-top: $padding-large-vertical;
+  @include common.flex-center(row, space-between, center);
+  padding: 24px 0 16px 0;
+  border-top: 1px solid common.$color-divider;
+  margin-top: 24px;
 }
 
 .devices-text {
-  font-size: $font-size-base;
+  font-size: common.$font-size-base;
   font-weight: 500;
-  color: $color-text-primary;
+  color: common.$color-text-primary;
 }
 
 .device-list {
@@ -76,15 +46,15 @@ $color-card-hover-shadow: var(--theme-card-hover-shadow);
 }
 
 .device-item {
-  @include flex-center(row, flex-start, center);
-  padding: $padding-medium;
-  background-color: $color-surface;
-  border-radius: $border-radius;
-  @include box-shadow($color-card-shadow);
+  @include common.flex-center(row, flex-start, center);
+  padding: 20px;
+  background-color: common.$color-surface;
+  border-radius: common.$border-radius-large;
+  @include box-shadow(common.$color-card-shadow);
   user-select: none;
 
   &:hover {
-    @include box-shadow($color-card-hover-shadow);
+    @include box-shadow(var(--theme-card-hover-shadow));
   }
 }
 
@@ -93,13 +63,13 @@ $color-card-hover-shadow: var(--theme-card-hover-shadow);
   place-items: center;
   width: 48px;
   height: 48px;
-  background-color: $color-icon-bg;
-  border-radius: $border-radius-circle;
+  background-color: var(--theme-icon-bg);
+  border-radius: 50%;
   margin-right: 20px;
 
   .material-icons {
     font-size: 28px;
-    color: $color-primary-accent;
+    color: common.$color-primary-accent;
   }
 }
 
@@ -109,19 +79,19 @@ $color-card-hover-shadow: var(--theme-card-hover-shadow);
 }
 
 .device-name {
-  font-size: $font-size-large;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: $color-text-primary;
+  color: common.$color-text-primary;
 }
 
 .device-details {
-  font-size: $font-size-small;
-  color: $color-text-secondary;
+  font-size: common.$font-size-small;
+  color: common.$color-text-secondary;
   margin-top: 4px;
 }
 
 .spin {
-  animation: spin $animation-duration-spin ease-in-out infinite;
+  animation: spin 1s ease-in-out infinite;
 }
 
 // Keyframes

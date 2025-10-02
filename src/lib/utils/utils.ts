@@ -1,3 +1,9 @@
+/**
+ * Convert bytes into human readable format
+ * @param bytes    - Number of bytes
+ * @param decimals - How many decimals to keep
+ * @returns          The human readable format (for example : 1.5 MB)
+ */
 export function calculateHumanReadableFileSize(
   bytes: number,
   decimals = 1,
@@ -12,6 +18,10 @@ export function calculateHumanReadableFileSize(
   return `${size.toFixed(decimals)} ${sizes[i]}`;
 }
 
+/**
+ * Apply theme if one is already saved in localStorage,
+ * else set it to default theme and colorscheme.
+ */
 export function applyTheme() {
   // get persisted theme & colorscheme preferrences
   const theme = localStorage.getItem("theme") ?? "dark";

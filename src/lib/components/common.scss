@@ -1,0 +1,62 @@
+// Variables
+
+// Colors
+$color-surface: var(--theme-surface);
+$color-text-primary: var(--theme-text-primary);
+$color-text-secondary: var(--theme-text-secondary);
+$color-primary-accent: var(--theme-primary-accent);
+$color-divider: var(--theme-divider);
+$color-card-shadow: var(--theme-card-shadow);
+$color-error: var(--theme-error);
+
+// Typography
+$font-size-base: 1rem;
+$font-size-small: 0.9rem;
+
+// Border Radius
+$border-radius-large: 16px;
+$border-radius-medium: 8px;
+
+
+// Mixins
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin button-base {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: $font-size-base;
+}
+
+// Base Styles
+.popup-overlay-base {
+  position: fixed;
+  inset: 0;
+  @include flex-center(row, center, center);
+  z-index: 9999;
+}
+
+.popup-card-base {
+  background-color: $color-surface;
+  color: $color-text-primary;
+  border-radius: $border-radius-large;
+  width: 100%;
+  box-shadow: $color-card-shadow;
+  user-select: none;
+}
+
+// Animations
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
