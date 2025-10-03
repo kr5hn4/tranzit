@@ -32,11 +32,11 @@ Tranzit uses mDNS and tcp heartbeats to discover devices, If a device stops resp
    - Install [rust](https://rust-lang.org/tools/install/) (preferrably the latest LTS version)
    - Install [node.js](https://nodejs.org/en/download) (preferrably the latest LTS version)
 
-3. Install dependencies: npm install
+3. Install dependencies: `npm install`
 
-4. Run the project locally
-   - npm run tauri dev (for windows, mac, linux)
-   - npm run tauri android dev (for android)
+4. Run the project locally 
+   - `npm run tauri dev` (for windows, mac, linux)
+   - `npm run tauri android dev` (for android)
 
    (please ignore the postcss error by clicking anywhere on the screen for now, as this is a known issue in [tauri](https://github.com/tauri-apps/tauri/issues/5839))
 
