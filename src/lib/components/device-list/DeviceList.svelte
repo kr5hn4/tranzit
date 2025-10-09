@@ -208,9 +208,9 @@
               ><i class="material-icons">laptop_windows</i></span
             >
           {:else if device.os.toLowerCase().includes("mac")}
-            <span class="device-icon"
-              ><i class="material-icons">laptop_mac</i></span
-            >
+            <span class="device-icon">
+              <embed src="/images/macos.svg" />
+            </span>
           {:else if device.os.toLowerCase().includes("windows")}
             <span class="device-icon">
               <embed src="/images/windows.svg" />
