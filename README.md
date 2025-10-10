@@ -16,8 +16,6 @@ Tranzit uses mDNS and tcp heartbeats to discover devices, If a device stops resp
 
 ## How to use
 
-[video demo](https://youtube.com/)
-
 1. Connect both devices to same wifi/local network.
 2. Open the Tranzit app on both devices, it will detect the devices automatically. If not detected automatically, click the refresh button
 3. Select files and click on the device from the device list to send a file transfer request.
