@@ -2,7 +2,7 @@
  * Convert bytes into human readable format
  * @param bytes    - Number of bytes
  * @param decimals - How many decimals to keep
- * @returns          The human readable format (for example : 1.5 MB)
+ * @returns          The human readable format (example : 1.5 MB)
  */
 export function calculateHumanReadableFileSize(
   bytes: number,
@@ -22,8 +22,9 @@ export function calculateHumanReadableFileSize(
  * Apply theme if one is already saved in localStorage,
  * else set it to default theme and colorscheme.
  */
-export function applyTheme() {
-  // get persisted theme & colorscheme preferrences
+export function applyTheme(): void {
+  // get persisted theme & colorscheme preferrences, if they are saved
+  // else set theme and colorscheme to default values
   const theme = localStorage.getItem("theme") ?? "dark";
   const colorScheme = localStorage.getItem("colorscheme") ?? "gruvbox";
 
@@ -57,8 +58,13 @@ export const VALID_THEMES: Theme[] = ["light", "dark"];
 export const VALID_COLORSCHEMES: ColorScheme[] = ["gruvbox", "solarized"];
 export const VALID_SFX: SfxEnabled[] = ["true", "false"];
 
-// validate all the data stored in localstorage,
-// if the values are not valid, set them to default values
+/**
+ * Validate all the data stored in localstorage, if the values are not valid, set them to default values
+ * @param key          - The key of value stored in localstorage
+ * @param validValues  - The list of valid values for the given key
+ * @param defaultValue - The default value for the given key
+ * @returns              void
+ */
 export function validateLocalStorageItem<K extends keyof LocalStorageDefaults>(
   key: K,
   validValues: LocalStorageDefaults[K][],
