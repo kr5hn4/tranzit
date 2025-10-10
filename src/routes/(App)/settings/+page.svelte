@@ -122,13 +122,16 @@
           class="info-link">Github issues</a
         >.
       </p>
-      <!-- <p class="info-text">Support development:</p> -->
+      <br />
       <a
         href="https://github.com/sponsors/kr5hn4"
         on:click={(event) =>
           openUrlInDefaultApp(event, "https://github.com/sponsors/kr5hn4")}
-        class="info-link">Github sponsor Link</a
+        class="info-link"
       >
+        Sponsor on Github</a
+      >
+      <br />
       <br />
       <div style="padding-top:5px">
         <a
