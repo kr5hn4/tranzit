@@ -42,13 +42,6 @@ $z-index-select-icon: 2;
   align-items: $align;
 }
 
-// @mixin responsive-font-size($default-size, $mobile-size, $breakpoint: 768px) {
-//   font-size: $default-size;
-//   @media (max-width: $breakpoint) {
-//     font-size: $mobile-size;
-//   }
-// }
-
 // Styles
 .container {
   max-width: $max-width-container;
@@ -75,7 +68,6 @@ $z-index-select-icon: 2;
   white-space: nowrap;
   margin: 0;
   color: $color-text-primary;
-  // @include responsive-font-size($font-size-title, $font-size-title-mobile);
   font-weight: 500;
 }
 
@@ -105,7 +97,6 @@ $z-index-select-icon: 2;
   font-weight: 500;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  // @include responsive-font-size($font-size-section-heading, $font-size-section-heading);
 }
 
 .setting-item {
@@ -126,7 +117,6 @@ $z-index-select-icon: 2;
 
 .setting-label {
   color: $color-text-primary;
-  // @include responsive-font-size($font-size-setting-label, $font-size-setting-label-mobile);
 }
 
 .setting-select {
@@ -230,7 +220,6 @@ $z-index-select-icon: 2;
 .info-text {
   color: $color-text-secondary;
   margin-bottom: 10px;
-  // @include responsive-font-size($font-size-info-text, $font-size-info-text-mobile);
 }
 
 .info-link {
