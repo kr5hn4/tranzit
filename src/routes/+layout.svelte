@@ -83,8 +83,8 @@
   {#if store.showTransferProgressPopup}
     <TransferProgressPopup />
   {/if}
-  {#if store.showPopup}
-    <GenericPopup message={store.popupMessage} />
+  {#if store.showGenericPopup}
+    <GenericPopup message={store.genericPopupMessage} />
   {/if}
 
   {@render children()}
