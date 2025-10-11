@@ -33,7 +33,7 @@
           serviceType: device.service_type,
           hostname: store.deviceInfo.hostname,
           osType: store.deviceInfo.os_type,
-          port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
+          port: parseInt(import.meta.env.VITE_BACKEND_HTTPS_PORT, 10),
           ipv4: ipv4,
           id: store.deviceInfo.app_id,
         });
@@ -59,8 +59,8 @@
 
   async function sendFileTransferRequest(ip: string): Promise<void> {
     if (store.selectedFiles.length === 0) {
-      store.popupMessage = "please select files first";
-      store.showPopup = true;
+      store.genericPopupMessage = "please select files first";
+      store.showGenericPopup = true;
       playSfx("pop");
       return;
     }
@@ -80,21 +80,21 @@
       file.progress = 0;
     });
 
-    store.popupMessage = "waiting for request to get accepted";
-    store.showPopup = true;
+    store.genericPopupMessage = "waiting for request to get accepted";
+    store.showGenericPopup = true;
     playSfx("pop");
 
     const fileTransferRequestResponse = await invoke("file_transfer_request", {
       ip,
-      port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
+      port: parseInt(import.meta.env.VITE_BACKEND_HTTPS_PORT, 10),
       selectedFiles: filesArray,
       deviceInfo: store.deviceInfo,
     });
-    store.showPopup = false;
+    store.showGenericPopup = false;
 
     if (fileTransferRequestResponse === "rejected") {
-      store.popupMessage = "File transfer request rejected :(";
-      store.showPopup = true;
+      store.genericPopupMessage = "File transfer request rejected :(";
+      store.showGenericPopup = true;
       playSfx("pop");
       return;
     }
@@ -118,7 +118,7 @@
           };
         }),
         ip,
-        port: parseInt(import.meta.env.VITE_BACKEND_PORT, 10),
+        port: parseInt(import.meta.env.VITE_BACKEND_HTTPS_PORT, 10),
       });
     }
   }

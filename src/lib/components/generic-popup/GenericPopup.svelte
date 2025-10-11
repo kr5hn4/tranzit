@@ -4,7 +4,7 @@
   export let message;
 
   const onReject = async () => {
-    store.showPopup = false;
+    store.showGenericPopup = false;
   };
 </script>
 
