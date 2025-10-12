@@ -43,5 +43,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tauri-macos-universal-dmg
-          path: src-tauri/target/release/bundle/macos/*.dmg
+          path: /Users/runner/work/tranzit/tranzit/src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
           if-no-files-found: error
