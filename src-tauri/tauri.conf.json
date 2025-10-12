@@ -20,7 +20,7 @@
       }
     },
     "macOS": {
-      "category": "public.app-category.utilities"
+      "dmg": {}
     }
   },
   "app": {
