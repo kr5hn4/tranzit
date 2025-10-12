@@ -1,6 +1,4 @@
-import type { DeviceInfo } from "$lib/types/deviceInfo";
-
-type FileInfo = { name: string; size: number };
+import type { SysInfo } from "$lib/types/sysInfo";
 
 export type Device = {
   name: string;
@@ -22,11 +20,13 @@ export type SelectedFiles = {
   progress?: number;
 };
 
+type FileInfo = { name: string; size: number };
+
 type FileTransferRequestQueue = {
   id: string;
   data: {
     files_info: FileInfo[];
-    device_info: DeviceInfo;
+    sys_info: SysInfo;
     receiverInfo: string;
   };
 } | null;
@@ -37,22 +37,22 @@ export const store = $state<{
   devices: Device[]; // list of discovered devices on the network
   showFileTransferRequestPopup: boolean;
   showTransferProgressPopup: boolean;
-  showPopup: boolean;
-  popupMessage: string; // popup message for the generic popup
+  showGenericPopup: boolean;
+  genericPopupMessage: string; // popup message for the generic popup
   fileTransferRequestQueue: FileTransferRequestQueue;
   waitingToAcceptTransferRequest: boolean;
   selectedFiles: SelectedFiles[];
-  deviceInfo: DeviceInfo;
+  sysInfo: SysInfo;
 }>({
   isFocused: false,
   areDevicesRefreshing: false,
   devices: [],
   showFileTransferRequestPopup: false,
   showTransferProgressPopup: false,
-  showPopup: false,
-  popupMessage: "",
+  showGenericPopup: false,
+  genericPopupMessage: "",
   fileTransferRequestQueue: null,
   waitingToAcceptTransferRequest: false,
   selectedFiles: [],
-  deviceInfo: { hostname: "", os_type: "", app_id: "" },
+  sysInfo: { hostname: "", os_type: "", app_id: "" },
 });

@@ -2,7 +2,7 @@
   import GenericPopup from "$components/generic-popup/GenericPopup.svelte";
   import TransferProgressPopup from "$components/transfer-progress-popup/TransferProgressPopup.svelte";
   import TransferRequestPopup from "$components/transfer-request-popup/TransferRequestPopup.svelte";
-  import type { DeviceInfo } from "$lib/types/deviceInfo";
+  import type { SysInfo } from "$lib/types/sysInfo";
   import {
     applyTheme,
     VALID_COLORSCHEMES,
@@ -53,7 +53,7 @@
           id: string;
           data: {
             files_info: FileInfo[];
-            device_info: DeviceInfo;
+            sys_info: SysInfo;
             receiverInfo: string;
           };
         };

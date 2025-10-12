@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { DeviceInfo } from "$lib/types/deviceInfo";
+  import type { SysInfo } from "$lib/types/sysInfo";
   import { playSfx } from "$lib/utils/sfx";
   import { store, type Device } from "$state/state.svelte";
   import { invoke } from "@tauri-apps/api/core";
@@ -31,15 +31,15 @@
         await invoke("assisted_discovery", {
           deviceIp: device.ip,
           serviceType: device.service_type,
-          hostname: store.deviceInfo.hostname,
-          osType: store.deviceInfo.os_type,
+          hostname: store.sysInfo.hostname,
+          osType: store.sysInfo.os_type,
           port: parseInt(import.meta.env.VITE_BACKEND_HTTPS_PORT, 10),
           ipv4: ipv4,
-          id: store.deviceInfo.app_id,
+          id: store.sysInfo.app_id,
         });
 
         // prevent self discovery by comparing device id's
-        if (device.id === store.deviceInfo.app_id) {
+        if (device.id === store.sysInfo.app_id) {
           return;
         }
 
@@ -88,7 +88,7 @@
       ip,
       port: parseInt(import.meta.env.VITE_BACKEND_HTTPS_PORT, 10),
       selectedFiles: filesArray,
-      deviceInfo: store.deviceInfo,
+      sysInfo: store.sysInfo,
     });
     store.showGenericPopup = false;
 
@@ -125,8 +125,8 @@
 
   onMount(async () => {
     // get host device info and save to store
-    const deviceInfo: DeviceInfo = await invoke("get_sys_info");
-    store.deviceInfo = deviceInfo;
+    const sysInfo: SysInfo = await invoke("get_sys_info");
+    store.sysInfo = sysInfo;
 
     await discoverDevices();
 
@@ -148,7 +148,7 @@
         return discoveredDevice.ip === device.ip;
       });
 
-      if (discoveredDevice.id === store.deviceInfo.app_id) {
+      if (discoveredDevice.id === store.sysInfo.app_id) {
         return;
       }
 

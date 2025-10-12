@@ -75,14 +75,14 @@ pub async fn file_transfer_request(
     ip: String,
     port: u16,
     selected_files: Vec<FileInfo>,
-    device_info: DeviceInfo,
+    sys_info: DeviceInfo,
 ) -> Result<serde_json::Value, String> {
     let url = format!("https://{}:{}/file-transfer-request", ip, port);
     debug_log!("Sending request to: {}", url);
 
     let body = json!({
         "files_info": selected_files,
-        "device_info": device_info,
+        "sys_info": sys_info,
         "receiver_info": ip
     });
 
