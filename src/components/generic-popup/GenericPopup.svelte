@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store } from "../../../state/state.svelte";
+  import { store } from "$state/state.svelte";
 
   export let message;
 

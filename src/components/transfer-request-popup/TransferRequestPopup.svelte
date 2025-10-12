@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store } from "../../../state/state.svelte";
+  import { store } from "$state/state.svelte";
   import { invoke } from "@tauri-apps/api/core";
 
   const onAccept = async () => {
@@ -19,6 +19,10 @@
   };
 </script>
 
+<!-- 
+   stopPropagation prevents this div's clicks from bubbling to the overlay (parent nodes)
+   which will close the popup 
+-->
 <div class="popup-overlay" on:click|stopPropagation>
   <div class="popup-card">
     <div class="popup-header">
@@ -32,7 +36,7 @@
     </div>
     <div class="file-list-container">
       <ul class="file-list">
-        {#each store.fileTransferRequestQueue?.data.files_info as file}
+        {#each store.fileTransferRequestQueue?.data.files_info ?? [] as file}
           <li class="file-item">
             <i class="material-icons file-icon">description</i>
             <span>{file.name}</span>

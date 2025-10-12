@@ -1,7 +1,7 @@
 <script lang="ts">
-  import GenericPopup from "$lib/components/generic-popup/GenericPopup.svelte";
-  import TransferProgressPopup from "$lib/components/transfer-progress-popup/TransferProgressPopup.svelte";
-  import TransferRequestPopup from "$lib/components/transfer-request-popup/TransferRequestPopup.svelte";
+  import GenericPopup from "$components/generic-popup/GenericPopup.svelte";
+  import TransferProgressPopup from "$components/transfer-progress-popup/TransferProgressPopup.svelte";
+  import TransferRequestPopup from "$components/transfer-request-popup/TransferRequestPopup.svelte";
   import type { DeviceInfo } from "$lib/types/deviceInfo";
   import {
     applyTheme,

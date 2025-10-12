@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { DeviceInfo } from "$lib/types/deviceInfo";
   import { playSfx } from "$lib/utils/sfx";
-  import { store, type Device } from "../../../state/state.svelte";
+  import { store, type Device } from "$state/state.svelte";
   import { invoke } from "@tauri-apps/api/core";
   import { listen, type Event } from "@tauri-apps/api/event";
   import { platform, type Platform } from "@tauri-apps/plugin-os";

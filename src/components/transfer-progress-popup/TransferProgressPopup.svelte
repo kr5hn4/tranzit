@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store } from "../../../state/state.svelte";
+  import { store } from "$state/state.svelte";
 
   const onAccept = async () => {
     store.showTransferProgressPopup = false;

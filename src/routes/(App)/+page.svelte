@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import DeviceList from "$lib/components/device-list/DeviceList.svelte";
+  import DeviceList from "$components/device-list/DeviceList.svelte";
   import { calculateHumanReadableFileSize } from "$lib/utils/utils";
   import { store, type SelectedFiles } from "../../state/state.svelte";
   import { invoke } from "@tauri-apps/api/core";
