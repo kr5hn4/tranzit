@@ -1,0 +1,47 @@
+name: Tranzit (macOS Installer - Universal DMG)
+
+on:
+  workflow_dispatch:   # manual trigger only
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Install Rust
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      # 3. Add x86 and aarch64 targets 
+      - name: Add macOS targets
+        run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
+
+      # 4. Install Node.js
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      # 5. Install npm dependencies
+      - name: Install npm dependencies
+        run: npm install
+
+      # 6. Install Tauri CLI globally
+      - name: Install Tauri CLI globally
+        run: npm install --global @tauri-apps/cli
+
+      # 🟦 Build step (Universal macOS .app)
+      - name: Build Tauri app (Universal macOS)
+        run: npm run tauri build -- --target universal-apple-darwin
+
+      # 7. Upload DMG artifact
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-macos-universal-dmg
+          path: src-tauri/target/release/bundle/macos/*.dmg
+          if-no-files-found: error
