@@ -42,7 +42,7 @@ pub async fn add_device(ip: String) {
     );
 }
 
-// remove a device to global device list
+// remove a device from the global device list
 #[tauri::command]
 pub async fn remove_device(ip: String) {
     let mut devices = DEVICES.lock().await;
@@ -53,7 +53,7 @@ pub async fn remove_device(ip: String) {
 pub async fn start_heartbeat(app: AppHandle) {
     debug_log!("💓 Started sending heartbeats to discovered devices.");
 
-    let app_for_task = app.clone();
+    let app_instance_clone = app.clone();
 
     spawn(async move {
         loop {
@@ -79,7 +79,7 @@ pub async fn start_heartbeat(app: AppHandle) {
                             Ok(iter) => iter.collect(),
                             Err(e) => {
                                 debug_log!("Could not resolve {}: {}", ip, e);
-                                mark_device_offline(&app_for_task, &ip).await;
+                                mark_device_offline(&app_instance_clone, &ip).await;
                                 continue;
                             }
                         };
@@ -88,7 +88,7 @@ pub async fn start_heartbeat(app: AppHandle) {
                             Some(a) => *a,
                             None => {
                                 debug_log!("No valid socket address for {}", ip);
-                                mark_device_offline(&app_for_task, &ip).await;
+                                mark_device_offline(&app_instance_clone, &ip).await;
                                 continue;
                             }
                         };
@@ -97,12 +97,12 @@ pub async fn start_heartbeat(app: AppHandle) {
                             Ok(Ok(s)) => s,
                             Ok(Err(e)) => {
                                 debug_log!("Connection error to {}: {}", ip, e);
-                                mark_device_offline(&app_for_task, &ip).await;
+                                mark_device_offline(&app_instance_clone, &ip).await;
                                 continue;
                             }
                             Err(_) => {
                                 debug_log!("Connection to {} timed out", ip);
-                                mark_device_offline(&app_for_task, &ip).await;
+                                mark_device_offline(&app_instance_clone, &ip).await;
                                 continue;
                             }
                         }
@@ -152,13 +152,13 @@ pub async fn start_heartbeat(app: AppHandle) {
                             dev.stream = Some(stream);
                             if !dev.is_online && saw_pong {
                                 dev.is_online = true;
-                                let _ = app_for_task.emit("device-online", dev.ip.clone());
+                                let _ = app_instance_clone.emit("device-online", dev.ip.clone());
                             }
                         } else {
                             dev.stream = None;
                             if dev.is_online {
                                 dev.is_online = false;
-                                let _ = app_for_task.emit("device-offline", dev.ip.clone());
+                                let _ = app_instance_clone.emit("device-offline", dev.ip.clone());
                             }
                         }
                     }
