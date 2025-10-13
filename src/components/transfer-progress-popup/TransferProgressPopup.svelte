@@ -23,7 +23,7 @@
       <h2 class="popup-title">Sending Files</h2>
       <p class="recipient-info">
         To <strong
-          >{store.fileTransferRequestQueue?.data.device_info.hostname}</strong
+          >{store.fileTransferRequestQueue?.data.sys_info.hostname}</strong
         >
       </p>
     </div>

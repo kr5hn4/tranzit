@@ -30,7 +30,7 @@
       <h2 class="popup-title">Incoming Files</h2>
       <p class="sender-info">
         Do you want to accept these files from <strong
-          >{store.fileTransferRequestQueue?.data.device_info.hostname}</strong
+          >{store.fileTransferRequestQueue?.data.sys_info.hostname}</strong
         >?
       </p>
     </div>

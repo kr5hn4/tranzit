@@ -64,7 +64,7 @@ struct DeviceInfo {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 struct FileTransferRequest {
     files_info: Vec<FilesInfo>,
-    device_info: DeviceInfo,
+    sys_info: DeviceInfo,
     receiver_info: String,
 }
 
