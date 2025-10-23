@@ -37,6 +37,9 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
+      - name: Create .env file
+        run: cp sample.env .env
+
       - name: Build Tauri AppImage
         run: |
           NO_STRIP=true npm run tauri build

@@ -25,6 +25,9 @@ jobs:
       - name: Install Tauri CLI globally
         run: npm install --global @tauri-apps/cli
 
+      - name: Create .env file
+        run: Copy-Item -Path sample.env -Destination .env -Force
+
       - name: Build Tauri app (no bundle)
         run: npm run tauri build -- --no-bundle
 
