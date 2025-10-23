@@ -11,7 +11,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["dmg", "appimage", "nsis"],
+    "targets": ["dmg", "appimage", "deb", "rpm", "nsis"],
     "icon": ["icons/icon.ico", "icons/32x32.png", "icons/icon.icns"],
     "windows": {
       "nsis": {
@@ -21,6 +21,14 @@
     },
     "macOS": {
       "dmg": {}
+    },
+    "linux": {
+      "rpm": {
+        "depends": ["webkit2gtk4.1", "gtk3"]
+      },
+      "deb": {
+        "depends": ["libwebkit2gtk-4.1-0", "libgtk-3-0"]
+      }
     }
   },
   "app": {

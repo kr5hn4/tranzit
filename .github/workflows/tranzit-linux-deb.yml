@@ -1,0 +1,59 @@
+name: Tranzit (.deb package)
+
+on:
+  workflow_dispatch:   # manual trigger only
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build .deb in Ubuntu 20.04 Docker
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace \
+            ubuntu:20.04 \
+            bash -c "
+              # Update and install basic dependencies
+              export DEBIAN_FRONTEND=noninteractive && \
+              apt-get update && \
+              apt-get install -y \
+                curl \
+                wget \
+                file \
+                build-essential \
+                libssl-dev \
+                libwebkit2gtk-4.0-dev \
+                libayatana-appindicator3-dev \
+                librsvg2-dev \
+                patchelf \
+                libxdo-dev \
+                ca-certificates && \
+
+              # Install Node.js LTS (via NodeSource)
+              curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
+              apt-get install -y nodejs && \
+
+              # Install Rust
+              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+              . \$HOME/.cargo/env && \
+
+              # Install frontend dependencies
+              npm install && \
+
+              # Create .env file
+              cp sample.env .env && \
+
+              # Build Tauri .deb
+              NO_STRIP=true npm run tauri build -- --bundles deb
+            "
+
+      - name: Upload .deb artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb-ubuntu-20.04
+          path: src-tauri/target/release/bundle/deb/*.deb
