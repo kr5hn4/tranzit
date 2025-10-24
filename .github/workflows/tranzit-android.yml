@@ -1,4 +1,5 @@
 name: Tranzit (Android .apk and .aab build)
+
 on:
   workflow_dispatch:  # manual trigger only
 
@@ -23,6 +24,10 @@ jobs:
           api-level: 33
           build-tools: 33.0.2
           ndk-version: 25.2.9519653
+
+      - name: Set NDK_HOME environment variable
+        run: |
+          echo "NDK_HOME=$ANDROID_HOME/ndk/25.2.9519653" >> $GITHUB_ENV
 
       - name: Setup Java (required for Gradle)
         uses: actions/setup-java@v3
