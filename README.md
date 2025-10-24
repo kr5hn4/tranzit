@@ -21,6 +21,76 @@ Tranzit uses mDNS and tcp heartbeats to discover devices, If a device stops resp
 3. Select files and click on the device from the device list to send a file transfer request.
 4. Accept the file transfer request on the other device to start the file transfer.
 
+## Download / Install
+
+<table>
+  <thead>
+    <tr>
+      <th>Platform</th>
+      <th>Package / Method</th>
+      <th>Install / Download</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Linux -->
+    <tr>
+      <td rowspan="3" valign="middle">
+        <img src="https://img.icons8.com/color/48/000000/linux.png" alt="Linux" title="Linux"/>
+      </td>
+      <td>AUR</td>
+      <td><code>yay -S tranzit</code></td>
+    </tr>
+    <tr>
+      <td>.deb</td>
+      <td><a href="https://github.com/kr5hn4/tranzit/releases/latest">Download</a></td>
+    </tr>
+    <tr>
+      <td>AppImage</td>
+      <td><a href="https://github.com/kr5hn4/tranzit/releases/latest">Download</a></td>
+    </tr>
+    <!-- macOS -->
+    <tr>
+      <td rowspan="2" valign="middle">
+        <img src="https://img.icons8.com/color/48/000000/mac-os.png" alt="macOS" title="macOS"/>
+      </td>
+      <td>Homebrew Cask</td>
+      <td><code>coming soon...</code></td>
+    </tr>
+    <tr>
+      <td>DMG</td>
+      <td><a href="https://github.com/kr5hn4/tranzit/releases/latest">Download</a></td>
+    </tr>
+    <!-- Windows -->
+    <tr>
+      <td>
+        <img src="https://img.icons8.com/color/48/000000/windows-xp.png" alt="Windows" title="Windows"/>
+      </td>
+      <td>Installer</td>
+      <td><a href="https://github.com/kr5hn4/tranzit/releases/latest">Download</a></td>
+    </tr>
+    <!-- Android -->
+    <tr>
+      <td rowspan="3" valign="middle">
+        <img src="https://img.icons8.com/color/48/000000/android-os.png" alt="Android" title="Android"/>
+      </td>
+      <td>APK (ARM64)</td>
+      <td><a href="https://github.com/kr5hn4/tranzit/releases/latest">Download</a></td>
+    </tr>
+    <tr>
+      <td>APK (x86_64)</td>
+      <td><a href="https://github.com/kr5hn4/tranzit/releases/latest">Download</a></td>
+    </tr>
+    <tr>
+      <td>Play Store</td>
+      <td valign="middle">
+        <a href="https://play.google.com/store/apps/details?id=org.tranzit.app" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" width="150"/>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ## How to run it locally
 
 1. Clone the repository
@@ -43,18 +113,6 @@ Tranzit uses mDNS and tcp heartbeats to discover devices, If a device stops resp
 6. Build the project
    - `npm run tauri build` (for windows, mac, linux)
    - `npm run tauri android` build (for android)
-
-## 📥 Download
-
-| Platform | Link                                                                                                |
-| -------- | --------------------------------------------------------------------------------------------------- |
-| Windows  | [Download](https://github.com/kr5hn4/tranzit/releases/download/v0.2.0/tranzit_0.1.0_x64-setup.exe)  |
-| macOS    | coming soon...                                                                                      |
-| Linux    | [Download](https://github.com/kr5hn4/tranzit/releases/download/v0.2.0/tranzit_0.1.0_amd64.AppImage) |
-| Android  | [Download](https://play.google.com/store/apps/details?id=org.tranzit.app)                           |
-| iOS      | coming soon...                                                                                      |
-
-(Join the [discord](https://discord.gg/2eGza5XT) channel to join the closed beta testing on Android)
 
 ## Contributors
 
