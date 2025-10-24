@@ -56,12 +56,6 @@ Tranzit uses mDNS and tcp heartbeats to discover devices, If a device stops resp
 
 (Join the [discord](https://discord.gg/2eGza5XT) channel to join the closed beta testing on Android)
 
-## 🛠️ Built With
-
-- 🦀 Rust
-- Tauri
-- SvelteKit
-
 ## Contributors
 
 <a href="https://github.com/kr5hn4/tranzit/graphs/contributors">
