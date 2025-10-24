@@ -61,3 +61,9 @@ Tranzit uses mDNS and tcp heartbeats to discover devices, If a device stops resp
 - 🦀 Rust
 - Tauri
 - SvelteKit
+
+## Contributors
+
+<a href="https://github.com/kr5hn4/tranzit/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kr5hn4/tranzit" />
+</a>
