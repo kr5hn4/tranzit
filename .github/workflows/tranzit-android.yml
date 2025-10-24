@@ -19,7 +19,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Setup Android SDK & NDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
         with:
           api-level: 33
           build-tools: 33.0.2
@@ -27,6 +27,7 @@ jobs:
 
       - name: Set NDK_HOME environment variable
         run: |
+          echo "ANDROID_HOME=~/Android/Sdk" >> $GITHUB_ENV
           echo "NDK_HOME=$ANDROID_HOME/ndk/25.2.9519653" >> $GITHUB_ENV
 
       - name: Setup Java (required for Gradle)
