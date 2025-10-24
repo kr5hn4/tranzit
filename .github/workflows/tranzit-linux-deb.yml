@@ -40,12 +40,12 @@ jobs:
       - name: Create .env file
         run: cp sample.env .env
 
-      - name: Build Tauri AppImage
+      - name: Build Tauri .deb
         run: |
           NO_STRIP=true npm run tauri build -- --bundles deb
 
       - name: Upload .deb artifact
         uses: actions/upload-artifact@v4
         with:
-          name: appimage-ubuntu-20.04
+          name: tranzit-linux-deb
           path: src-tauri/target/release/bundle/deb/*.deb
