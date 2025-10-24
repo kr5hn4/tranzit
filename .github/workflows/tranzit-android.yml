@@ -25,11 +25,6 @@ jobs:
           build-tools: 33.0.2
           ndk-version: 27.3.13750724
 
-      - name: Debug Android paths
-        run: |
-          echo "ANDROID_SDK_ROOT: $ANDROID_SDK_ROOT"
-          ls -la $ANDROID_SDK_ROOT/ndk/ || echo "No NDK directory"
-
       - name: Set ANDROID_HOME and NDK_HOME
         run: |
           echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
@@ -52,14 +47,16 @@ jobs:
           rustup target add aarch64-linux-android
           rustup target add x86_64-linux-android
 
-      - name: Build universal APK (ARM64 and x86_64)
-        run: npm run tauri android build -- --target aarch64 x86_64
+      - name: Build arm64 and x86_64 APK
+        run: npm run tauri android build -- --target aarch64 x86_64 --apk --split-per-abi
 
-      - name: Upload universal APK
+      - name: Upload arm64 and x86_64 APK
         uses: actions/upload-artifact@v4
         with:
           name: tranzit-android-apk-arm64
-          path: src-tauri/gen/android/app/build/outputs/apk/universal/release/*.apk
+          path: |
+            src-tauri/gen/android/app/build/outputs/apk/arm64/release/*.apk
+            src-tauri/gen/android/app/build/outputs/apk/x86_64/release/*.apk
 
       - name: Build AAB (includes all architectures)
         run: npm run tauri android build -- --aab --target aarch64 x86_64
