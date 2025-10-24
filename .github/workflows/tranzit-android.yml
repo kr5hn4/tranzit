@@ -23,7 +23,7 @@ jobs:
         with:
           api-level: 33
           build-tools: 33.0.2
-          ndk-version: 25.2.9519653
+          ndk-version: 27.3.13750724
 
       - name: Debug Android paths
         run: |
@@ -33,7 +33,7 @@ jobs:
       - name: Set ANDROID_HOME and NDK_HOME
         run: |
           echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
-          echo "NDK_HOME=$ANDROID_SDK_ROOT/ndk/25.2.9519653" >> $GITHUB_ENV
+          echo "NDK_HOME=$ANDROID_SDK_ROOT/ndk/27.3.13750724" >> $GITHUB_ENV
 
       - name: Setup Java (required for Gradle)
         uses: actions/setup-java@v3
