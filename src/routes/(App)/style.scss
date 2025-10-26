@@ -235,3 +235,42 @@ $color-error: var(--theme-error);
     padding: 0 8px;
   }
 }
+
+// File icon wrapper for non-image files
+.file-icon-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--theme-surface);
+  border-radius: $file-preview-border-radius;
+  
+  @media (min-width: 600px) {
+    width: calc(100% - 16px);
+    height: calc(100% - 48px);
+    margin-top: 8px;
+  }
+}
+
+.file-type-icon {
+  font-size: 48px !important;
+  color: var(--theme-text-secondary);
+  user-select: none;
+  
+  @media (max-width: 768px) {
+    font-size: 32px !important;
+  }
+}
+
+.file-info {
+  display: none;
+
+  @media (min-width: 600px) {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--theme-text-secondary);
+    padding: 0 8px;
+  }
+}
